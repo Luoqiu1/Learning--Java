@@ -1,10 +1,11 @@
 package classes_objects;
-
+//import text1.Ttt1;
 public class Hero {
 	String name; //姓名
     float hp; //血量     
     float armor; //护甲
     int moveSpeed; //移动速度     
+    static String copyright="版权由拳头公司所有";
     public Hero() {
     }
     public Hero(String name,float hp) {
@@ -22,6 +23,7 @@ public class Hero {
 //        new Hero();        
 //        //使用一个引用来指向这个对象
         Hero h = new Hero();     
+        Hero h4=new Hero();
 //        h.hp=3.333f;
 //        Hero h2=h;
 //        Hero h3=h2;
@@ -32,5 +34,10 @@ public class Hero {
 //        System.out.println(h.hp);
         
         Hero h5=new Hero("牛牛",555,30,300);
+        System.out.println(h5.copyright);
+        System.out.println(h4.copyright);
+        h5.copyright="哈哈哈哈";
+        System.out.println(h4.copyright);
+        System.out.println(h5.copyright);
     }  
 }
