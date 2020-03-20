@@ -2,7 +2,11 @@ package classes_objects;
 
 public class Item {
 	int price;
-	private Item() {
+	String name;
+	public Item() {
+	}
+	public Item(int a) {
+		price=a;
 	}
 	private static Item instance;
 	public static Item getIstance() {
