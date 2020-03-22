@@ -7,10 +7,16 @@ public class Hero implements Mortal{
     int moveSpeed; //移动速度     
     static String copyright="版权由拳头公司所有";
     public Hero() {
+    	System.out.println("Hero构造方法");
     }
     public Hero(String a) {
     	name=a;
+    	System.out.println("Hero构造方法");
     }
+    public static void battleWin(){
+        System.out.println("hero battle win");
+    }
+     
     private void Print() {
     	System.out.println("这是一个实验");
     }
@@ -40,8 +46,9 @@ public class Hero implements Mortal{
 //        //创建一个对象
 //        new Hero();        
 //        //使用一个引用来指向这个对象
-        Hero h = new Hero();     
-        Hero h4=new Hero();
+//        Hero h = new Hero();     
+//        Hero h4=new Hero();
+        ADHero h6=new ADHero("a");
 //        h.hp=3.333f;
 //        Hero h2=h;
 //        Hero h3=h2;
@@ -51,11 +58,11 @@ public class Hero implements Mortal{
 //        System.out.println(h3.hp);
 //        System.out.println(h.hp);
         
-        Hero h5=new Hero("牛牛",555,30,300);
-        System.out.println(h5.copyright);
-        System.out.println(h4.copyright);
-        h5.copyright="哈哈哈哈";
-        System.out.println(h4.copyright);
-        System.out.println(h5.copyright);
+//        Hero h5=new Hero("牛牛",555,30,300);
+//        System.out.println(h5.copyright);
+//        System.out.println(h4.copyright);
+//        h5.copyright="哈哈哈哈";
+//        System.out.println(h4.copyright);
+//        System.out.println(h5.copyright);
     }  
 }
