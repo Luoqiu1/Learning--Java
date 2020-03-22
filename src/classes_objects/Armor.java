@@ -2,6 +2,9 @@ package classes_objects;
 
 public class Armor extends Item {
 	int ac;
+	public boolean disposable() {
+		return false;
+	}
 	public void Print() {
 		System.out.println("≤ª ‘ ‘¡À—Ω");
 	}

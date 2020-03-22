@@ -7,7 +7,7 @@ public class Hero implements Mortal{
     int moveSpeed; //移动速度     
     static String copyright="版权由拳头公司所有";
     public Hero() {
-    	System.out.println("Hero构造方法");
+//    	System.out.println("Hero构造方法");
     }
     public Hero(String a) {
     	name=a;
@@ -41,6 +41,9 @@ public class Hero implements Mortal{
     	this.armor=armor;
     	this.moveSpeed=moveSpeed;
     }
+    public void finalize() {
+    	System.out.println("这个东西在被回收哦");
+    }
     
     public static void main(String[] args) {
 //        //创建一个对象
@@ -49,6 +52,15 @@ public class Hero implements Mortal{
 //        Hero h = new Hero();     
 //        Hero h4=new Hero();
         ADHero h6=new ADHero("a");
+        System.out.println(h6.toString());
+        Hero h7=new Hero();
+        System.out.println(h7.toString());
+        System.out.println(h7.toString());
+        Hero h;
+        for(int i=0;i<10000;++i) {
+        	h=new Hero();
+        	
+        }
 //        h.hp=3.333f;
 //        Hero h2=h;
 //        Hero h3=h2;

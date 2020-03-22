@@ -5,7 +5,7 @@ public class ADHero extends Hero implements Mortal{
 		System.out.println("ADHero构造方法");
 	}
 	public ADHero(String a) {
-		super(a);
+	//	super(a);
 		this(a,"aa");
 		System.out.println("ADHero构造方法");
 	}
