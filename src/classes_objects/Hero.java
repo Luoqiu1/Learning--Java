@@ -1,15 +1,26 @@
 package classes_objects;
 //import text1.Ttt1;
-public class Hero {
+public class Hero implements Mortal{
 	String name; //姓名
     float hp; //血量     
     float armor; //护甲
     int moveSpeed; //移动速度     
     static String copyright="版权由拳头公司所有";
-    Hero() {
+    public Hero() {
+    }
+    public Hero(String a) {
+    	name=a;
     }
     private void Print() {
     	System.out.println("这是一个实验");
+    }
+    public void die() {
+    	System.out.println("我死掉了呃呃");
+    }
+    public void killHero(Hero x) {
+    	System.out.print(name+" 杀掉了 "+
+    			x.name+",");
+    	x.die();
     }
 //    private static Hero instance=new Hero();
 //    public static Hero getInstance() {
