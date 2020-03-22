@@ -6,12 +6,15 @@ public class Hero {
     float armor; //护甲
     int moveSpeed; //移动速度     
     static String copyright="版权由拳头公司所有";
-    private Hero() {
+    Hero() {
     }
-    private static Hero instance=new Hero();
-    public static Hero getInstance() {
-    	return instance;
+    private void Print() {
+    	System.out.println("这是一个实验");
     }
+//    private static Hero instance=new Hero();
+//    public static Hero getInstance() {
+//    	return instance;
+//    }
     public Hero(String name,float hp) {
     	this.name=name;
     	this.hp=hp;

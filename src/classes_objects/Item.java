@@ -8,6 +8,9 @@ public class Item {
 	public Item(int a) {
 		price=a;
 	}
+	public void Print() {
+		System.out.println(" ‘ ‘ø¥≈∂");
+	}
 	private static Item instance;
 	public static Item getIstance() {
 		if(instance==null) {

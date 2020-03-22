@@ -1,11 +1,14 @@
 package classes_objects;
-public class Support extends Hero {
+public class Support extends Hero implements Healer{
+	
 	 public void heal() {
 		 System.out.println(name+" 进行了一次治疗，但是对象忘记惹");
 	 }
+	
 	 public void heal(Hero h1) {
 		 System.out.println(name+" 为 "+h1.name+" 进行了一次治疗，但是治疗量忘记惹");
-	 }
+	 } 
+	 
 	 public void heal(Hero h1,int hp) {
 		 System.out.println(name+" 为 "+h1.name+" 进行了一次治疗量为 "+hp+" 的治疗");
 		 h1.hp+=hp;
@@ -13,6 +16,10 @@ public class Support extends Hero {
 	 
 	 public void swap1(int a,int b) {
 		 int mid=a;a=b;b=mid;
+	 }
+	 
+	 private void Print() {
+		 System.out.println("哦牛，，尝试看看");
 	 }
 	 
 	 public static void main(String[] args) {
@@ -34,6 +41,11 @@ public class Support extends Hero {
 		 System.out.println(a+" "+b);
 		 h.swap1(a,b);
 		 System.out.println(a+" "+b);
+		 String c="5";
+		 String d=a+c;
+		 System.out.println(d);
+		 System.out.println();
+		 h.Print();
 		 
 	 }
     
