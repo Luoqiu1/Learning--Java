@@ -38,6 +38,15 @@ public abstract class Item {
 	//	Hero h1=Hero.getInstance();
 	//	h1.hp=455;
 	//	System.out.println(h1.hp);
-		Item i1=new Item();
+	
+	//	Item i1=new Item();
+		
+		Item i1=new Item() {
+			public boolean disposable() {
+				return true;
+			}
+		};
+		System.out.println(i1.disposable());
+		
 	}
 }
