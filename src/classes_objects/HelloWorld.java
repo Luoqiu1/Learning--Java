@@ -75,15 +75,74 @@ public class HelloWorld {
 //		String s1="¸ÇÂ×";
 //		char []str=new char[] {'ßÀ','ßÀ'
 //	};
-		String s2=new String();
-		Scanner s=new Scanner(System.in);
-		s2=s.next();
+//		String s2=new String();
+//		Scanner s=new Scanner(System.in);
+//		s2=s.next();
 //		System.out.println(s2);
 //		s1="nihao";
 //		System.out.println(s1);
 		
 //		s2[0]='c';
 		
-		System.out.println(s2);
+//		System.out.println(s2);
+		
+		String s[]=new String[8];
+		for(int i=0;i<8;++i) {
+			char str[]=new char[5];
+			String xx="";
+			for(short k='0';k<='9';++k) {
+				xx+=(char)k;
+			}
+			for(short k='a';k<='z';++k) {
+				xx+=(char)k;
+			}
+			for(short k='A';k<='Z';++k) {
+				xx+=(char)k;
+			}
+			for(int j=0;j<5;++j) {
+//				while(true) {
+//					char c;
+//					c=(char)(Math.random()*120+48);
+//					if(Character.isLetter(c)||
+//							Character.isDigit(c)) {
+//						str[j]=c;break;
+//					}
+//				}		
+				
+				str[j]=xx.charAt((int)(Math.random()*xx.length()));
+			}
+			s[i]=String.valueOf(str);
+		}
+		for(int i=0;i<7;++i) {
+			for(int j=i+1;j<8;++j) {
+				if(Character.isDigit(s[i].charAt(0))) {
+					if(Character.isDigit(s[j].charAt(0))) {
+						if(s[i].charAt(0)>s[j].charAt(0)) {
+							String mid=s[i];
+							s[i]=s[j];
+							s[j]=mid;
+						}
+					}
+				}
+				else if(Character.isLetter(s[i].charAt(0))) {
+					if(Character.isLetter(s[j].charAt(0))) {
+						char c1,c2;
+						c1=Character.toLowerCase(s[i].charAt(0));
+						c2=Character.toLowerCase(s[j].charAt(0));
+						if(c1>c2) {
+							String mid=s[i];
+							s[i]=s[j];
+							s[j]=mid;
+						}
+					}
+					else {
+						String mid=s[i];
+						s[i]=s[j];
+						s[j]=mid;
+					}
+				}
+			}
+		}
+		for(String x:s)System.out.println(x);
 	}
 }
