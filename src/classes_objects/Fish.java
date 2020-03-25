@@ -21,3 +21,11 @@ public class Fish extends Animal implements Pet{
 		System.out.println(name+" ÕıÔÚºÍÄãÍæÅ¶¡£¡£");
 	}
 }
+
+int x;
+for (int i = 0; i < str.length; i++) {
+	do {
+		x=(int)(Math.random()*200);
+	}while(x<48&&x>57&&x<65&&x>90&&x>97&&x>122);
+	
+}
