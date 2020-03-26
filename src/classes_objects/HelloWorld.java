@@ -1,9 +1,19 @@
 package classes_objects;
-import java.util.Scanner;
 
 public class HelloWorld {
+	public static String matchPassword(String Password,int depth) {
+		if(depth==Password.length())return "";//满足递归结束条件返回空串
+		while(true) {
+			//保证random范围内覆盖到所有数字和字母就可以了
+			//这里大概取了个上限是168，一定能够覆盖到
+			char c=(char)((int)(Math.random()*120+48));
+			if(c==Password.charAt(depth)) {
+				return c+matchPassword(Password,depth+1);
+			}
+		}
+	}
 	public static void main(String[] args) {
-		String xx="";
+		String xx="";//存储所有数字和字母
 		for(short k='0';k<='9';++k) {
 			xx+=(char)k;
 		}
@@ -13,31 +23,12 @@ public class HelloWorld {
 		for(short k='A';k<='Z';++k) {
 			xx+=(char)k;
 		}
-		String s5="";
-		s5+='0'+'0';
-//		s5+='0';			
-		System.out.println(s5);
 		char str[]=new char[3];
+		//生成随机字符串
 		for(int i=0;i<3;++i) {
 			str[i]=xx.charAt((int)(Math.random()*xx.length()));
 		}
-		String s1=new String(str);System.out.println(s1);
-		boolean flag=false;
-		for(int i=0;i<xx.length();++i) {
-			for(int j=0;j<xx.length();++j) {
-				for(int k=0;k<xx.length();++k) {
-					String s2="";
-					s2+=xx.charAt(i);
-					s2+=xx.charAt(j);
-					s2+=xx.charAt(k);
-					if(s1.equals(s2)) {
-						System.out.println(s2);
-						flag=true;break;
-					}
-				}
-				if(flag)break;
-			}
-			if(flag)break;
-		}
+		String s1=new String(str);
+		System.out.println(matchPassword(s1,0));
 	}
 }

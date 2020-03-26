@@ -76,5 +76,7 @@ public class Hero implements Mortal{
 //        h5.copyright="込込込込";
 //        System.out.println(h4.copyright);
 //        System.out.println(h5.copyright);
+        battleWin();
+        Hero.battleWin();
     }  
 }
