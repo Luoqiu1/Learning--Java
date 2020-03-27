@@ -1,6 +1,8 @@
 package classes_objects;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 
 public class MyStringBuffer implements IStringBuffer {
 //	private String s;
@@ -66,4 +68,19 @@ public class MyStringBuffer implements IStringBuffer {
 		return length;
 	}
 	
+}
+
+
+
+
+SimpleDateFormat sdf0=new SimpleDateFormat("HHmmss");
+String s1=sdf0.format(dt[j]);
+String s2=sdf0.format(dt[j+1]);
+System.out.println(s1);System.out.println(s2);
+int d1=Integer.parseInt(s1);
+int d2=Integer.parseInt(s2);
+System.out.println(d1);System.out.println(d2);System.out.println();
+if(d1>d2) {
+	Date d=new Date();
+	d=dt[j+1];dt[j+1]=dt[j];dt[j]=d;
 }
