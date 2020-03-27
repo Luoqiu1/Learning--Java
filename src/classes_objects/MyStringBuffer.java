@@ -51,7 +51,7 @@ public class MyStringBuffer implements IStringBuffer {
 		delete(start,length);
 	}
 	public void delete(int start,int end) {
-		if(start<0||start>length||end<0||end>length||start>=end)return;
+		if(start<0||start>=length||end<0||end>length||start>=end)return;
 		System.arraycopy(value, end, value, start, length-end);
 		length-=end-start;
 	}
