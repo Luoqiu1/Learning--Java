@@ -11,7 +11,7 @@ public class Hero implements Mortal{
     }
     public Hero(String a) {
     	name=a;
-    	System.out.println("Hero构造方法");
+   // 	System.out.println("Hero构造方法");
     }
     public static void battleWin(){
         System.out.println("hero battle win");
@@ -44,39 +44,35 @@ public class Hero implements Mortal{
     public void finalize() {
     	System.out.println("这个东西在被回收哦");
     }
-    
+    public void attack(Hero h) throws EnemyHeroIsDeadException {
+    	if(h.hp==0) {
+    		throw new EnemyHeroIsDeadException(h.name+"已经挂了，不需要释放技能");
+    	}
+    	else {
+    		System.out.println(h.name+" 受到了 "+name+" 的攻击");
+    	}
+    }
+    class EnemyHeroIsDeadException extends Exception {
+    	public EnemyHeroIsDeadException() {
+    	}
+    	public EnemyHeroIsDeadException(String msg) {
+    		super(msg);
+    	}
+    }
+
     public static void main(String[] args) {
-//        //创建一个对象
-//        new Hero();        
-//        //使用一个引用来指向这个对象
-//        Hero h = new Hero();     
-//        Hero h4=new Hero();
-        ADHero h6=new ADHero("a");
-        System.out.println(h6.toString());
-        Hero h7=new Hero();
-        System.out.println(h7.toString());
-        System.out.println(h7.toString());
-        Hero h;
-        for(int i=0;i<10000;++i) {
-        	h=new Hero();
-        	
-        }
-//        h.hp=3.333f;
-//        Hero h2=h;
-//        Hero h3=h2;
-//        System.out.println(h3.hp);
-//        h3.hp=2.222f;
-//        System.out.println(h2.hp);
-//        System.out.println(h3.hp);
-//        System.out.println(h.hp);
-        
-//        Hero h5=new Hero("牛牛",555,30,300);
-//        System.out.println(h5.copyright);
-//        System.out.println(h4.copyright);
-//        h5.copyright="哈哈哈哈";
-//        System.out.println(h4.copyright);
-//        System.out.println(h5.copyright);
-        battleWin();
-        Hero.battleWin();
+    	Hero garen=new Hero("盖伦");
+    	Hero Teemo=new Hero("提莫");
+    	Teemo.hp=0;
+    	try {
+    		garen.attack(Teemo);
+    	}
+    	catch(EnemyHeroIsDeadException e) {
+    		e.printStackTrace();
+    		String str=e.getMessage();
+    		System.out.println(str);
+//    		System.out.println("异常的具体原因："+e.getMessage());
+//    		e.printStackTrace();
+    	}
     }  
 }

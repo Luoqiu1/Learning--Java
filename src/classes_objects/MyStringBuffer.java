@@ -4,6 +4,9 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 
+import classes_objects.MyStringBuffer.IndexIsNagetiveException;
+import classes_objects.MyStringBuffer.IndexIsoutofRangeException;
+
 public class MyStringBuffer implements IStringBuffer {
 //	private String s;
 	private int length=0;
@@ -28,16 +31,20 @@ public class MyStringBuffer implements IStringBuffer {
 		for(int i=0;i<length;++i)System.out.print(value[i]);
 		System.out.println();
 	}
-	public void append(String str) {
+	public void append(String str)throws IndexIsNagetiveException
+	,IndexIsoutofRangeException,NullPointerException {
 		insert(length,str);
 	}
-	public void append(char c) {
+	public void append(char c)throws IndexIsNagetiveException
+	,IndexIsoutofRangeException,NullPointerException {
 		append(String.valueOf(c));
 	}
-	public void insert(int pos,char b) {
+	public void insert(int pos,char b)throws IndexIsNagetiveException
+	,IndexIsoutofRangeException,NullPointerException {
 		insert(pos,String.valueOf(b));
 	}
-	public void insert(int pos,String b) {
+	public void insert(int pos,String b) throws IndexIsNagetiveException
+	,IndexIsoutofRangeException,NullPointerException{
 		if(pos<0||pos>length||null==b)return;
 		if(b.length()+length>capacity) {
 			capacity=(int)((b.length()+length)*1.5);
@@ -49,10 +56,11 @@ public class MyStringBuffer implements IStringBuffer {
 		System.arraycopy(b.toCharArray(), 0, value, pos, b.length());
 		length+=b.length();
 	}
-	public void delete(int start) {
+	public void delete(int start) throws IndexIsNagetiveException, IndexIsoutofRangeException {
 		delete(start,length);
 	}
-	public void delete(int start,int end) {
+	public void delete(int start,int end) throws IndexIsNagetiveException
+	,IndexIsoutofRangeException{
 		if(start<0||start>=length||end<0||end>length||start>=end)return;
 		System.arraycopy(value, end, value, start, length-end);
 		length-=end-start;
@@ -67,20 +75,20 @@ public class MyStringBuffer implements IStringBuffer {
 	public int length() {
 		return length;
 	}
-	
-}
-
-
-
-
-SimpleDateFormat sdf0=new SimpleDateFormat("HHmmss");
-String s1=sdf0.format(dt[j]);
-String s2=sdf0.format(dt[j+1]);
-System.out.println(s1);System.out.println(s2);
-int d1=Integer.parseInt(s1);
-int d2=Integer.parseInt(s2);
-System.out.println(d1);System.out.println(d2);System.out.println();
-if(d1>d2) {
-	Date d=new Date();
-	d=dt[j+1];dt[j+1]=dt[j];dt[j]=d;
+	class IndexIsNagetiveException extends Exception{
+		public IndexIsNagetiveException(){
+			
+		}
+		public IndexIsNagetiveException(String msg) {
+			super(msg);
+		}
+	}
+	class IndexIsoutofRangeException extends Exception{
+		public IndexIsoutofRangeException(){
+			
+		}
+		public IndexIsoutofRangeException(String msg) {
+			super(msg);
+		}
+	}
 }
