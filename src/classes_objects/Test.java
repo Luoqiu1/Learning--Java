@@ -3,11 +3,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
-public class Text extends MyStringBuffer {
+public class Test extends MyStringBuffer {
 	public static void main(String[] args) {
 		
 		try {
-			int a=5/0;
+		//	int a=5/0;
 			System.out.println("³É¹¦£¡");
 		}
 		catch(Exception e) {

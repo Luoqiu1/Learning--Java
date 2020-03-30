@@ -3,7 +3,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileInputStream;
 
-public class TextException {
+public class TestException {
 	public static int f1(){
 		return 1;
 	}

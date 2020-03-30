@@ -1,8 +1,11 @@
 package classes_objects;
 
 public class OverdraftException extends Exception{
-	double deficit;
+	private double deficit;
 	public OverdraftException(){
+	}
+	public double getDeficit() {
+		return deficit;
 	}
 	public OverdraftException(String msg) {
 		super(msg);

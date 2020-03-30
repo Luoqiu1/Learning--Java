@@ -2,7 +2,7 @@ package classes_objects;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-public class TextDate {
+public class TestDate {
 	public static void main(String[] args) {
 //		long second=1000;long minute=60*second;long hour=60*minute;
 //		long day=24*hour;long year=365*day;long leapday=(2000-1970)/4*day;
