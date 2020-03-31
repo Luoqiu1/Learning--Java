@@ -33,9 +33,11 @@ public class TestFile {
 //		File f3=new File(file.getAbsolutePath()+"-3");
 		int n=(int)file.length()/4;
 		int m=(int)file.length()%4;
+		FileInputStream fis=null;
 		try {
 			byte a[]=new byte[(int)file.length()];
-			FileInputStream fis=new FileInputStream(file);
+//			FileInputStream fis=new FileInputStream(file);
+			fis=new FileInputStream(file);
 			fis.read(a);
 			fis.close();
 			for(int i=0;i<4;++i) {
@@ -80,6 +82,16 @@ public class TestFile {
 		}
 		catch(IOException e) {
 			e.printStackTrace();
+		}
+		finally {
+			if(fis!=null) {
+				try {
+					fis.close();
+				}
+				catch(IOException e) {
+					e.printStackTrace();
+				}
+			}
 		}
 		
 	}
