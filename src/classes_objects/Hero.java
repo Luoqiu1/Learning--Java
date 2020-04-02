@@ -1,6 +1,14 @@
 package classes_objects;
+import java.io.Serializable;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.File;
 //import text1.Ttt1;
-public class Hero implements Mortal{
+public class Hero implements Mortal,Serializable{
+	private static final long serialVersionUID=1l;
 	String name; //姓名
     float hp; //血量     
     float armor; //护甲
@@ -59,20 +67,46 @@ public class Hero implements Mortal{
     		super(msg);
     	}
     }
-
-    public static void main(String[] args) {
-    	Hero garen=new Hero("盖伦");
-    	Hero Teemo=new Hero("提莫");
-    	Teemo.hp=0;
-    	try {
-    		garen.attack(Teemo);
-    	}
-    	catch(EnemyHeroIsDeadException e) {
-    		e.printStackTrace();
-    		String str=e.getMessage();
-    		System.out.println(str);
-//    		System.out.println("异常的具体原因："+e.getMessage());
-//    		e.printStackTrace();
-    	}
-    }  
+	
+	    public static void main(String[] args) {
+	    	Hero h[]=new Hero[10];
+	    	for (int i = 0; i < h.length; i++) {
+				h[i]=new Hero();
+				h[i].name="Hero "+i;
+			}
+	    	File f=new File("c:/Data/heros");
+	    	try(FileOutputStream fos=new FileOutputStream(f);
+	    			ObjectOutputStream oos=new ObjectOutputStream(fos);
+	    			FileInputStream fis=new FileInputStream(f);
+	    			ObjectInputStream ois=new ObjectInputStream(fis);){
+//	    		for (int i = 0; i < h.length; i++) {
+//					oos.writeObject(h[i]);
+//				}
+	    		oos.writeObject(h);
+	    		oos.flush();
+//	    		Hero h2[]=new Hero[h.length];
+	    		Hero h2[]=(Hero[])ois.readObject();
+//	    		for (int i = 0; i < h2.length; i++) {
+//					Hero h0=new Hero();
+//					h2=(Hero[])ois.readObject();
+//					h2[i]=h0;
+//				}
+	    		boolean flag=true;
+	    		for (int i = 0; i < h2.length; i++) {
+	    			System.out.println(h[i].name);
+					if(!h[i].name.equals(h2[i].name)) {
+						flag=false;break;
+					}
+				}
+	    		if(flag) {
+	    			System.out.println("成功！");
+	    		}
+	    	}
+	    	catch(IOException e) {
+	    		e.printStackTrace();
+	    	}
+	    	catch(ClassNotFoundException e) {
+	    		e.printStackTrace();
+	    	}
+	    }
 }
