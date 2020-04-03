@@ -1,10 +1,14 @@
 package classes_objects;
 
-public abstract class Item {
+//public abstract class Item implements LOL {
+public class Item implements LOL {
 	int price;
 	String name;
-	public abstract boolean disposable();
+//	public abstract boolean disposable();
 	public Item() {
+	}
+	public Item(String s) {
+		name=s;
 	}
 	public Item(int a) {
 		price=a;
@@ -13,12 +17,12 @@ public abstract class Item {
 		System.out.println(" ‘ ‘ø¥≈∂");
 	}
 	private static Item instance;
-	public static Item getIstance() {
-		if(instance==null) {
-			instance=new Item();
-		}
-		return instance;
-	}
+//	public static Item getIstance() {
+//		if(instance==null) {
+//			instance=new Item();
+//		}
+//		return instance;
+//	}
 	public String toString() {
 		return name+price;
 	}
@@ -46,7 +50,7 @@ public abstract class Item {
 				return true;
 			}
 		};
-		System.out.println(i1.disposable());
+//		System.out.println(i1.disposable());
 		
 	}
 }

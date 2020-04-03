@@ -7,7 +7,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.File;
 //import text1.Ttt1;
-public class Hero implements Mortal,Serializable{
+public class Hero implements Mortal,Serializable,LOL{
 	private static final long serialVersionUID=1l;
 	String name; //ÐÕÃû
     float hp; //ÑªÁ¿     
