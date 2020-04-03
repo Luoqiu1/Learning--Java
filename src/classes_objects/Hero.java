@@ -21,6 +21,9 @@ public class Hero implements Mortal,Serializable{
     	name=a;
    // 	System.out.println("Hero构造方法");
     }
+    public String toString() {
+    	return name;
+    }
     public static void battleWin(){
         System.out.println("hero battle win");
     }
