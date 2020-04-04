@@ -22,7 +22,7 @@ public class Hero implements Mortal,Serializable,LOL{
    // 	System.out.println("Hero构造方法");
     }
     public String toString() {
-    	return name;
+    	return String.format("%s %s", name,hp);
     }
     public static void battleWin(){
         System.out.println("hero battle win");
