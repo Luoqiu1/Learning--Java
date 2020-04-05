@@ -7,15 +7,15 @@ import java.util.ArrayList;
 public class Node {
 	public Node leftNode;
 	public Node rightNode;
-	public Object value;
+	public Integer value;
 	public Node() {
 	}
 	public Node(Object v) {
-		value=v;
+		value=(Integer) v;
 	}
 	public void add(Object v) {
 		if(value==null) {
-			value=v;
+			value=(Integer) v;
 		}
 		else {
 			
@@ -60,13 +60,13 @@ public class Node {
 		//因为在调用方法的时候会调用构造，构造一个新的实例！
 		//倘若这个实参本身就不存在，构造就会失败，抛出异常！
 	}
-	public List<Object> dataMidGo(){//返回列表的递归中序遍历
+	public List<Integer> dataMidGo(){//返回列表的递归中序遍历
 									//面向对象的思维习惯，在递归结束时输出对象
-		List<Object> values=new ArrayList<>();
+		List<Integer> values=new ArrayList<>();
 		if(leftNode!=null)values.addAll(leftNode.dataMidGo());
 		values.add(value);
 		if(rightNode!=null)values.addAll(rightNode.dataMidGo());
-		System.out.println(values);
+	//	System.out.println(values);
 		return values;
 	}
 	public void lastGo(Node t) {//递归后序遍历
@@ -86,7 +86,7 @@ public class Node {
 			Tree.add(n);
 		}
 		Tree.midGo(Tree);System.out.println();
-		List<Object> it=Tree.dataMidGo();
+		List<Integer> it=Tree.dataMidGo();
 		System.out.println(it);
 	}
 }
