@@ -58,7 +58,7 @@ public class TestCollection {
 		searchNotHashMap(lst,"Hero-5555");
 		System.out.println("大小："+h1.size());
 		System.out.println("大小："+h2.size());
-		System.out.println((h2.equals(h1)));
+		System.out.println("两操作得到结果是否相同："+(h2.equals(h1)));
 	//	System.out.println(h1);System.out.println(h2);
 		
 	}
