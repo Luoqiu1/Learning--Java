@@ -1,5 +1,6 @@
 package classes_objects;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Iterator;
@@ -8,60 +9,97 @@ public class TestCollection {
 	public static int n=20;
 	public static int m=3000000;
 	public static void main(String[] args) {
-//		List<Integer> list=new ArrayList<>();
-//		for(int i=0;i<n;++i) {
-//			list.add((int)(Math.random()*40000));
-//		}
-//		List<Integer> listCopy=new ArrayList<>(list);
-////		System.out.println(list);
-////		System.out.println(listCopy);
-//		List<Integer> listCopy2=new ArrayList<>(list);
-//		System.out.println(listCopy);
-//		System.out.println(listCopy2);
-//		System.out.println(list);	
-//		listCopy2=binarySort(listCopy2);
-//	//	binarySort(listCopy2);
-//		bubbleSort(list);
-////		System.out.println(list);
-////		System.out.println(listCopy);
-//		selectionSort(listCopy);
-////		System.out.println(list);
-//		System.out.println("比较选择法跟冒泡法数组是否相同："+list.equals(listCopy));
-//		System.out.println("比较选择法跟二叉树数组是否相同："+listCopy.equals(listCopy2));
-//		System.out.println("选择法："+listCopy);
-//		System.out.println("二叉树法："+listCopy2);
-//		System.out.println("冒泡法："+list);	
-		
-		List<Hero> lst=new ArrayList<>();
-		for(int i=0;i<m;++i) {
-		//	lst.add(new Hero("Hero-"+(int)(Math.random())*9000+1000));
-			//草啊。。仔细一点。如果不稳的话就分设多个变量来
-			//括号太多容易看不清
-			//上面注释这里，其实就是恒等于1000了...
-			//(int)(Math.random())*9000这里恒等于0！。。
-			lst.add(new Hero("Hero-"+(int)(Math.random()*9000+1000)));
-		}
-		HashMap<String,List<Hero>> hashmap=new HashMap<>();
-//		List<Hero> hee=hashmap.get("ss");
-//		if(hee==null)System.out.println("yesss");
-		for(Hero h:lst) {
-			List<Hero> hs=hashmap.get(h.name);
-			if(hs==null) {
-				hs=new ArrayList<>();
-				hashmap.put(h.name,hs);
-			}
-			hs.add(h);
-		}
-		List<Hero> h1=//hashmap.get("Hero-5555");
-		searchHashMap(hashmap,"Hero-5555");
-		List<Hero> h2=
-		searchNotHashMap(lst,"Hero-5555");
-		System.out.println("大小："+h1.size());
-		System.out.println("大小："+h2.size());
-		System.out.println("两操作得到结果是否相同："+(h2.equals(h1)));
-	//	System.out.println(h1);System.out.println(h2);
-		
+		String ss[]=new String[100];
+		 // 初始化
+        for (int i = 0; i < ss.length; i++) {
+            ss[i] = randomString(2);
+        }
+        // 打印
+        for (int i = 0; i < ss.length; i++) {
+            System.out.print(ss[i] + " ");
+            if (19 == i % 20)
+                System.out.println();
+        }
+        HashSet<String> hashSet=new HashSet<>();
+        for(String s1:ss) {
+        	int cnt=0;
+        	for(String s2:ss) {
+        		if(s1.equals(s2)) {
+        			++cnt;
+        			if(cnt==2)break;
+        		}
+        	}
+        	if(cnt==2)hashSet.add(s1);
+        }
+        
+//        for (String s1 : ss) {
+//            int repeat = 0;
+//            for (String s2 : ss) {
+//                if (s1.equalsIgnoreCase(s2)) {
+//                    repeat++;
+//                    if (2 == repeat) {
+//                        // 当repeat==2的时候，就找打了一个非己的重复字符串
+// 
+//                        putIntoDuplicatedArray(s1);
+//                        break;
+//                    }
+//                }
+//            }
+//        }
+// 
+//        System.out.printf("总共有 %d种重复的字符串%n", pos);
+//        if (pos != 0) {
+//            System.out.println("分别是：");
+//            for (int i = 0; i < pos; i++) {
+//                System.out.print(foundDuplicated[i] + " ");
+//            }
+//        }
+//    }
+// 
+//    static String[] foundDuplicated = new String[100];
+//    static int pos;
+// 
+//    private static void putIntoDuplicatedArray(String s) {
+//        for (int i = 0; i < pos; i++){
+//            if (foundDuplicated[i].equalsIgnoreCase(s))
+//                return;
+//        }
+// 
+//        foundDuplicated[pos++] = s;
+//    }
+        
+        //上面注释的是用数组的做法来的！
+        //与使用HashSet来比较
+        //数组要额外考虑是否重复输出！
+        //而HashSet不用！因为当键字相同的时候
+        //HashSet会自动覆盖掉！自动解决了重复的问题！
+        
+        if(hashSet.size()!=0) {
+        	System.out.println("重复的有：");
+        	for(String s:hashSet)System.out.println(s);
+        }
+        else System.out.println("没有重复的");
+       
 	}
+	private static String randomString(int length) {
+        String pool = "";
+        for (short i = '0'; i <= '9'; i++) {
+            pool += (char) i;
+        }
+        for (short i = 'a'; i <= 'z'; i++) {
+            pool += (char) i;
+        }
+        for (short i = 'A'; i <= 'Z'; i++) {
+            pool += (char) i;
+        }
+        char cs[] = new char[length];
+        for (int i = 0; i < cs.length; i++) {
+            int index = (int) (Math.random() * pool.length());
+            cs[i] = pool.charAt(index);
+        }
+        String result = new String(cs);
+        return result;
+    }
 	public static List<Hero> searchHashMap(HashMap<String,List<Hero>> hm,String name) {
 		List<Hero> hs;
 		long ss1=System.currentTimeMillis();
