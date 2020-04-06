@@ -3,83 +3,26 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Collections;
 import java.util.Iterator;
 
 public class TestCollection {
 	public static int n=20;
 	public static int m=3000000;
+	public static int k=1000000;
 	public static void main(String[] args) {
-		String ss[]=new String[100];
-		 // 初始化
-        for (int i = 0; i < ss.length; i++) {
-            ss[i] = randomString(2);
-        }
-        // 打印
-        for (int i = 0; i < ss.length; i++) {
-            System.out.print(ss[i] + " ");
-            if (19 == i % 20)
-                System.out.println();
-        }
-        HashSet<String> hashSet=new HashSet<>();
-        for(String s1:ss) {
-        	int cnt=0;
-        	for(String s2:ss) {
-        		if(s1.equals(s2)) {
-        			++cnt;
-        			if(cnt==2)break;
-        		}
-        	}
-        	if(cnt==2)hashSet.add(s1);
-        }
-        
-//        for (String s1 : ss) {
-//            int repeat = 0;
-//            for (String s2 : ss) {
-//                if (s1.equalsIgnoreCase(s2)) {
-//                    repeat++;
-//                    if (2 == repeat) {
-//                        // 当repeat==2的时候，就找打了一个非己的重复字符串
-// 
-//                        putIntoDuplicatedArray(s1);
-//                        break;
-//                    }
-//                }
-//            }
-//        }
-// 
-//        System.out.printf("总共有 %d种重复的字符串%n", pos);
-//        if (pos != 0) {
-//            System.out.println("分别是：");
-//            for (int i = 0; i < pos; i++) {
-//                System.out.print(foundDuplicated[i] + " ");
-//            }
-//        }
-//    }
-// 
-//    static String[] foundDuplicated = new String[100];
-//    static int pos;
-// 
-//    private static void putIntoDuplicatedArray(String s) {
-//        for (int i = 0; i < pos; i++){
-//            if (foundDuplicated[i].equalsIgnoreCase(s))
-//                return;
-//        }
-// 
-//        foundDuplicated[pos++] = s;
-//    }
-        
-        //上面注释的是用数组的做法来的！
-        //与使用HashSet来比较
-        //数组要额外考虑是否重复输出！
-        //而HashSet不用！因为当键字相同的时候
-        //HashSet会自动覆盖掉！自动解决了重复的问题！
-        
-        if(hashSet.size()!=0) {
-        	System.out.println("重复的有：");
-        	for(String s:hashSet)System.out.println(s);
-        }
-        else System.out.println("没有重复的");
-       
+		List<Integer> list=new ArrayList<>();
+		for (int i = 0; i < 10; i++) {
+			list.add(i);
+		}
+		System.out.println(list);
+		int cnt=0;
+		for(int i=0;i<k;++i) {
+			Collections.shuffle(list);
+			if(list.get(0)==3&&list.get(1)==1
+					&&list.get(2)==4)++cnt;
+		}
+		System.out.println("3 1 4 出现了 "+cnt+"次，概率是"+(double)cnt/k);
 	}
 	private static String randomString(int length) {
         String pool = "";
