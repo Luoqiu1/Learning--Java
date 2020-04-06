@@ -1,36 +1,38 @@
 package classes_objects;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.LinkedList;
 
 public class TestCollection {
 	public static int n=100;
 	public static int m=3000000;
 	public static int k=1000000;
 	public static void main(String[] args) {
-		HashSet<Integer> hashSet=new HashSet<>();
-		List<Integer> list=new ArrayList<>();
-		long s1=System.currentTimeMillis();
-		while(hashSet.size()<n) {
-			int k=(int)(Math.random()*(n+1));
-			hashSet.add(k);
-		}
-		long s2=System.currentTimeMillis();
-		while(list.size()<n) {
-			int k=(int)(Math.random()*(n+1));
-			if(!list.contains(k))
-				list.add(k);
-		}
+//		HashSet<String> hs=new HashSet<String>;
+//		hs.add();
+//		List<String> hsa=new List<String>;
+//		Set<String> sss=new ArrayList<String>;
 		
-		long s3=System.currentTimeMillis();
-		Collections.sort(list);
-		System.out.println("HashSet完成用时："+(s2-s1));
-	//	System.out.println(hashSet);
-		System.out.println("ArrayList完成用时："+(s3-s2));
-	//	System.out.println(list);
+		HashMap<String,String> hashMap=new HashMap<>();
+		HashMap<String,String> temp=new HashMap<>();
+		hashMap.put("adc", "物理英雄");
+		hashMap.put("apc", "魔法英雄");
+		hashMap.put("t", "坦克");
+		Set<String> s1=hashMap.keySet();
+		for(String x:s1) {
+			temp.put(hashMap.get(x), x);
+		}
+		System.out.println(hashMap);
+		hashMap.clear();
+		hashMap.putAll(temp);
+		System.out.println(hashMap);
+		System.out.println(temp);
 	}
 	private static String randomString(int length) {
         String pool = "";
