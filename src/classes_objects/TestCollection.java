@@ -7,22 +7,30 @@ import java.util.Collections;
 import java.util.Iterator;
 
 public class TestCollection {
-	public static int n=20;
+	public static int n=100;
 	public static int m=3000000;
 	public static int k=1000000;
 	public static void main(String[] args) {
+		HashSet<Integer> hashSet=new HashSet<>();
 		List<Integer> list=new ArrayList<>();
-		for (int i = 0; i < 10; i++) {
-			list.add(i);
+		long s1=System.currentTimeMillis();
+		while(hashSet.size()<n) {
+			int k=(int)(Math.random()*(n+1));
+			hashSet.add(k);
 		}
-		System.out.println(list);
-		int cnt=0;
-		for(int i=0;i<k;++i) {
-			Collections.shuffle(list);
-			if(list.get(0)==3&&list.get(1)==1
-					&&list.get(2)==4)++cnt;
+		long s2=System.currentTimeMillis();
+		while(list.size()<n) {
+			int k=(int)(Math.random()*(n+1));
+			if(!list.contains(k))
+				list.add(k);
 		}
-		System.out.println("3 1 4 出现了 "+cnt+"次，概率是"+(double)cnt/k);
+		
+		long s3=System.currentTimeMillis();
+		Collections.sort(list);
+		System.out.println("HashSet完成用时："+(s2-s1));
+	//	System.out.println(hashSet);
+		System.out.println("ArrayList完成用时："+(s3-s2));
+	//	System.out.println(list);
 	}
 	private static String randomString(int length) {
         String pool = "";
