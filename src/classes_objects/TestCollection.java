@@ -8,33 +8,46 @@ import java.util.Set;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.LinkedHashSet;
 
 public class TestCollection {
 	public static int n=100;
 	public static int m=3000000;
 	public static int k=1000000;
 	public static void main(String[] args) {
-//		HashSet<String> hs=new HashSet<String>;
-//		hs.add();
-//		List<String> hsa=new List<String>;
-//		Set<String> sss=new ArrayList<String>;
-		
-		HashMap<String,String> hashMap=new HashMap<>();
-		HashMap<String,String> temp=new HashMap<>();
-		hashMap.put("adc", "物理英雄");
-		hashMap.put("apc", "魔法英雄");
-		hashMap.put("t", "坦克");
-		Set<String> s1=hashMap.keySet();
-		for(String x:s1) {
-			temp.put(hashMap.get(x), x);
+		for (int i = 0; i < 100; i++) {
+			String s=random();
+			System.out.print(s);
+			System.out.println("："+hashcode(s));
 		}
-		System.out.println(hashMap);
-		hashMap.clear();
-		hashMap.putAll(temp);
-		System.out.println(hashMap);
-		System.out.println(temp);
+		String s="new";
+		System.out.println(s.hashCode());;
+		System.out.println("GWhR："+hashcode("GWhR"));
 	}
-	private static String randomString(int length) {
+	public static String random() {
+		int k=(int)(Math.random()*8+2);
+		char str[]=new char[k];
+		for (int i = 0; i < str.length; i++) {
+			char c;
+			while(true) {
+				c=(char)(Math.random()*150);
+				if(Character.isDigit(c)||
+						Character.isLetter(c))break;
+			}
+			str[i]=c;
+		}
+		return new String(str);
+	}
+	public static int hashcode(String s) {
+		if(s.length()==0)return 0;
+		char str[]=s.toCharArray();
+		int k=0;
+		for(char c:str) {
+			k+=c;
+		}
+		return k<0?-k*23%2000:k*23%2000;
+	}
+	public static String randomString(int length) {
         String pool = "";
         for (short i = '0'; i <= '9'; i++) {
             pool += (char) i;
