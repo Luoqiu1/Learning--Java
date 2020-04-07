@@ -1,4 +1,6 @@
 package classes_objects;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -73,24 +75,65 @@ public class MyHashMap implements IHashMap {
 		return k<0?-k*23%2000:k*23%2000;
 	}
 	public static void main(String[] args) {
-		MyHashMap hashMap=new MyHashMap();
-		hashMap.put("Hero:2", "garen");
-		hashMap.put("Hero:2", "garen");
-		hashMap.put("Hero:2", "garen");
-		hashMap.put("Hero:2387", "garen3");
-		hashMap.put("Hero:5555", "garen3");
-		Object s=hashMap.get("Hero:1");
-		System.out.println(hashMap);
-        System.out.println(hashMap.hashcode("name=hero-2387"));
-        System.out.println(hashMap.hashcode("name=hero-5555"));
-//        List<Integer> test=new LinkedList<>();
-//        Integer i=4;
-//        test.add(i);System.out.println(test+" 空？"+test.isEmpty());
-//        System.out.println(System.identityHashCode(test));
-//        test.removeAll(test);System.out.println(test+" 空？"+test.isEmpty());
-//        System.out.println(System.identityHashCode(test));
-//        test.add(i);System.out.println(test+" 空？"+test.isEmpty());
-//        test.add(6);System.out.println(test+" 空？"+test.isEmpty());
-//        System.out.println(System.identityHashCode(test));
+//		MyHashMap hashMap=new MyHashMap();
+//		hashMap.put("Hero:2", "garen");
+//		hashMap.put("Hero:2", "garen");
+//		hashMap.put("Hero:2", "garen");
+//		hashMap.put("Hero:2387", "garen3");
+//		hashMap.put("Hero:5555", "garen3");
+//		Object s=hashMap.get("Hero:1");
+//		System.out.println(hashMap);
+//        System.out.println(hashMap.hashcode("name=hero-2387"));
+//        System.out.println(hashMap.hashcode("name=hero-5555"));
+////        List<Integer> test=new LinkedList<>();
+////        Integer i=4;
+////        test.add(i);System.out.println(test+" 空？"+test.isEmpty());
+////        System.out.println(System.identityHashCode(test));
+////        test.removeAll(test);System.out.println(test+" 空？"+test.isEmpty());
+////        System.out.println(System.identityHashCode(test));
+////        test.add(i);System.out.println(test+" 空？"+test.isEmpty());
+////        test.add(6);System.out.println(test+" 空？"+test.isEmpty());
+////        System.out.println(System.identityHashCode(test));
+		MyHashMap heros=new MyHashMap();
+		List<Hero> hs=new ArrayList<Hero>();
+		for(int i=0;i<100000;++i) {
+			hs.add(new Hero("hero-"+random()));
+		}
+		for(Hero h:hs) {
+			List<Hero> Heros=(List<Hero>)heros.get(h.name);
+			if(Heros==null) {
+				Heros=new ArrayList<>();
+				heros.put(h.name, Heros);
+				//上面两行同样不能够交换顺序！
+				//参见17行注释！
+			}
+			Heros.add(h);
+			
+		}
+		System.out.println(searchHashMap(heros,"hero-5555"));
+		System.out.println(searchNotHashMap(hs,"hero-5555"));
+	}
+	public static String random() {
+		return String.valueOf((int)(Math.random()*10000));
+	}
+	public static List<Hero> searchHashMap(MyHashMap hm,String name) {
+		List<Hero> hs;
+		long ss1=System.currentTimeMillis();
+		hs=(List<Hero>)hm.get(name);
+		long ss2=System.currentTimeMillis();
+		System.out.printf("哈希表花费：%dss%n",ss2-ss1);
+		return hs;
+	}
+	public static List<Hero> searchNotHashMap(List<Hero> list,String name) {
+		List<Hero> hs=new ArrayList<>();
+		long ss1=System.currentTimeMillis();
+		for(Hero h:list) {
+		//	if(h.name=="Hero-5555")hs.add(h);
+			//怎么又是这个经典错误......==与equals！
+			if(h.name.equals(name))hs.add(h);
+		}
+		long ss2=System.currentTimeMillis();
+		System.out.printf("迭代花费：%dss%n",ss2-ss1);
+		return hs;
 	}
 }
