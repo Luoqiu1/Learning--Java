@@ -6,8 +6,9 @@ public class Item implements LOL,Comparable<Item> {
 	String name;
 //	public abstract boolean disposable();
 	public int compareTo(Item i) {
-		if(price>i.price)return -1;
-		return 1;
+//		if(price>i.price)return -1;
+//		return 1;
+		return -(int)(price-i.price);
 	}
 	public Item() {
 	}

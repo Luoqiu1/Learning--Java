@@ -18,29 +18,10 @@ public class TestCollection {
 	public static int m=3000000;
 	public static int k=1000000;
 	public static void main(String[] args) {
-		Comparator<Integer> c=new Comparator<Integer>() {
-	//		public int compare(int a,int b) {
-			public int compare(Integer a,Integer b) {
-				//Comparator<>中必须要提供参数类型
-				//然后在
-				if(a>b)return -65;
-				return 5;
-			}
-		};
-		Random r=new Random();
-		Set<Integer> set=new TreeSet<>(c);
-		for(int i=0;i<10;++i) {
-			set.add(r.nextInt(100));
-		}
-		System.out.println(set);
-		
-		List<Item> item=new ArrayList<Item>();
-		for(int i=0;i<10;++i) {
-			item.add(new Item("Item:"+i,r.nextInt(100)));
-		}
-		System.out.println(item);
-		Collections.sort(item);
-		System.out.println(item);
+		List<Number> list=new ArrayList<>();
+		list.add((1));
+		list.add((1.314));
+		System.out.println(list);
 	}
 	public static String random() {
 		int k=(int)(Math.random()*8+2);
