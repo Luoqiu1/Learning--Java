@@ -1,11 +1,18 @@
 package classes_objects;
 
 //public abstract class Item implements LOL {
-public class Item implements LOL {
+public class Item implements LOL,Comparable<Item> {
 	int price;
 	String name;
 //	public abstract boolean disposable();
+	public int compareTo(Item i) {
+		if(price>i.price)return -1;
+		return 1;
+	}
 	public Item() {
+	}
+	public Item(String s,int a) {
+		name=s;price=a;
 	}
 	public Item(String s) {
 		name=s;
@@ -16,16 +23,16 @@ public class Item implements LOL {
 	public void Print() {
 		System.out.println("试试看哦");
 	}
-	private static Item instance;
+	public String toString() {
+		return name+" price:"+price;
+	}
+	//private static Item instance;
 //	public static Item getIstance() {
 //		if(instance==null) {
 //			instance=new Item();
 //		}
 //		return instance;
 //	}
-	public String toString() {
-		return name+price;
-	}
 	public void finalize() {
 		System.out.println("当前对象正在被回收");
 	}
