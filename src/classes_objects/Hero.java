@@ -55,6 +55,11 @@ public class Hero implements Mortal,Serializable,LOL{
     	this.name=name;
     	this.hp=hp;
     }
+    public Hero(String name,float hp,int damage) {
+    	this.name=name;
+    	this.hp=hp;
+    	this.damage=damage;
+    }
     public Hero(String name,float hp,float ac) {
     	this.name=name;
     	this.hp=hp;
