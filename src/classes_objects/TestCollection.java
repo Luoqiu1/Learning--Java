@@ -1,6 +1,7 @@
 package classes_objects;
 import java.util.ArrayList;
 import java.util.TreeSet;
+import java.util.function.Supplier;
 import java.util.Random;
 import java.util.Comparator;
 import java.util.Collection;
@@ -17,11 +18,38 @@ public class TestCollection {
 	public static int n=100;
 	public static int m=3000000;
 	public static int k=1000000;
+//	public static void main(String[] args) {
+//		Random r=new Random();
+//		List<Hero> hs = new ArrayList<>();
+//        for(int i=0;i<10;++i) {
+//        	hs.add(new Hero("Hero:"+i,r.nextInt(100)));
+//        }
+//        System.out.println("初始化的Items:");
+//        System.out.println(hs);
+////        Collections.sort(is);
+//        Collections.sort(hs,(h,h2)->h.compareHero(h2));
+//        System.out.println("排序后的Items:");
+//        System.out.println(hs);
+//    }
 	public static void main(String[] args) {
-		List<Number> list=new ArrayList<>();
-		list.add((1));
-		list.add((1.314));
-		System.out.println(list);
+        insertFirst(ArrayList::new, "ArrayList");
+  
+        insertFirst(LinkedList::new, "LinkedList");
+  
+    }
+    private static void insertFirst(Supplier<List> s, String type) {
+    	List l=s.get();
+        int total = 1000 * 100;
+        final int number = 5;
+        long start = System.currentTimeMillis();
+        for (int i = 0; i < total; i++) {
+            l.add(0, number);
+        }
+        long end = System.currentTimeMillis();
+        System.out.printf("在%s 最前面插入%d条数据，总共耗时 %d 毫秒 %n", type, total, end - start);
+    }
+	public static int compare(Item i1,Item i2) {
+		return -(i1.price-i2.price);
 	}
 	public static String random() {
 		int k=(int)(Math.random()*8+2);

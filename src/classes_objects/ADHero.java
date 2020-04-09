@@ -4,6 +4,9 @@ public class ADHero extends Hero implements Mortal{
 	public ADHero() {
 		System.out.println("ADHero构造方法");
 	}
+	public void win() {
+    	System.out.println("ADHero win");
+    }
 	public ADHero(String a) {
 	//	super(a);
 		this(a,"aa");
@@ -14,5 +17,9 @@ public class ADHero extends Hero implements Mortal{
 	}
 	public void die() {
 		System.out.println("ADC死掉惹，，");
+	}
+	public static void main(String[] args) {
+		Hero h=new ADHero();
+		h.win();
 	}
 }

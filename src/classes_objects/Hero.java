@@ -13,16 +13,24 @@ public class Hero implements Mortal,Serializable,LOL{
     float hp; //血量     
     float armor; //护甲
     int moveSpeed; //移动速度     
+    int damage;
     static String copyright="版权由拳头公司所有";
+    public int compareHero(Hero h) {
+    	return (int)(hp-h.hp);
+    }
+    public void win() {
+    	System.out.println("Hero win");
+    }
     public Hero() {
 //    	System.out.println("Hero构造方法");
     }
+    
     public Hero(String a) {
     	name=a;
    // 	System.out.println("Hero构造方法");
     }
     public String toString() {
-    	return String.format("%s %s", name,hp);
+    	return String.format("[name %s,hp %s,damage %s]", name,hp,damage);
     }
     public static void battleWin(){
         System.out.println("hero battle win");
