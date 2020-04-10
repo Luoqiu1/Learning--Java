@@ -47,5 +47,10 @@ public class TestThread {
     public static void main(String[] args) {
         File folder =new File("C:\\\\Users\\\\57195\\\\Desktop\\\\Learning--Java");
         search(folder,"Hero");
+//        Runnable t=new Runnable() {
+//        	public void run() {
+//        		
+//        	}
+//        };
     }
 }
