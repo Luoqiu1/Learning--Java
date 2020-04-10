@@ -43,14 +43,31 @@ public class TestThread {
         }
  
     }
- 
     public static void main(String[] args) {
-        File folder =new File("C:\\\\Users\\\\57195\\\\Desktop\\\\Learning--Java");
-        search(folder,"Hero");
-//        Runnable t=new Runnable() {
-//        	public void run() {
-//        		
-//        	}
-//        };
+        Thread gameTime=new Thread() {
+        	public void run() {
+        		int k=0;
+        		while(true) {
+	        		try {
+	        			sleep(1000);
+	        		}
+	        		catch(Exception e) {
+	        			e.printStackTrace();
+	        		}
+	        		System.out.printf("LOL进行了 %d 秒%n",++k);
+	        		if(k==15) {
+	        			System.out.println("LOL进行了一分钟，结束游戏！");
+	        			break;
+	        		}
+        		}
+        	}
+        };
+        gameTime.start();
+        Hero leesin=new Hero();
+        leesin.setDaemon(true);
+        new Thread(leesin).start();
+//        leesin.setDaemon(true);
+//        leesin.start();
+//        leesin.setDaemon(true);
     }
 }

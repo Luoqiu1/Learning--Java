@@ -7,14 +7,60 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.File;
 //import text1.Ttt1;
-public class Hero implements Mortal,Serializable,LOL{
+public class Hero extends Thread implements Mortal,Serializable,LOL,Runnable{
 	private static final long serialVersionUID=1l;
 	String name; //姓名
     float hp; //血量     
     float armor; //护甲
     int moveSpeed; //移动速度     
     int damage;
+    int cnt;
     static String copyright="版权由拳头公司所有";
+    public void run() {
+    	cnt=1;
+    	while(true) {
+    		try {
+    		if(skill())Thread.sleep(1000);
+    		else Thread.sleep(5000);
+    		}
+    		catch(Exception e) {
+    			e.printStackTrace();
+    		}
+//    		System.out.println(cnt);
+//    		if(cnt==15)break;
+    	}
+    }
+    public boolean skill() {
+    	boolean flag=true;
+    	int k=cnt%4;
+    	if(k==0) {
+    		System.out.println("开始为时5秒的充能");
+    		flag=false;
+    	}
+    	else System.out.printf("波动拳第%d发%n",k);
+    	++cnt;
+    	return flag;
+    }
+    public void attackHero(Hero h) {
+        //把暂停时间去掉，多条线程各自会尽力去占有CPU资源
+        //线程的优先级效果才可以看得出来
+//        try {
+//           
+//            Thread.sleep(0);
+//        } catch (InterruptedException e) {
+//            // TODO Auto-generated catch block
+//            e.printStackTrace();
+//        }
+        h.hp-=damage;
+        System.out.format("%s 正在攻击 %s, %s的血变成了 %.0f%n",name,h.name,h.name,h.hp);
+          
+        if(h.isDead())
+            System.out.println(h.name +"死了！");
+    }
+  
+    public boolean isDead() {
+        return 0>=hp?true:false;
+    }
     public int compareHero(Hero h) {
     	return (int)(hp-h.hp);
     }
