@@ -6,11 +6,11 @@ public class MyStack implements Stack{
 	public MyStack() {
 		Heros=new LinkedList<>();
 	}
-	public void push(Hero h) {
+	public synchronized void push(Hero h) {
 //		Heros.addLast(h);
 		Heros.offer(h);
 	}
-	public Hero poll(){
+	public synchronized Hero poll(){
 //		Hero x=Heros.getFirst();
 //		Heros.removeFirst();
 //		return x;

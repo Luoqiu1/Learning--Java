@@ -35,7 +35,7 @@ public class GeneratePasswordThread implements Runnable{
 //              System.out.println("穷举出来的密码是：" + guess);
                	midAns.add(guess);
                	try{
-               		Thread.sleep(100);
+               		Thread.sleep(1000);
                	}
                	catch(Exception e) {
                		e.printStackTrace();
