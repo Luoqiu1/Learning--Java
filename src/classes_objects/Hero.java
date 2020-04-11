@@ -16,6 +16,35 @@ public class Hero extends Thread implements Mortal,Serializable,LOL,Runnable{
     int damage;
     int cnt;
     static String copyright="版权由拳头公司所有";
+    public synchronized void hurt() {
+    	hp-=1;
+//    	if(hp<=1)try {
+    	while(hp<=50)try {
+    		//重复查看
+    		//因为当线程被唤醒后如果是减血线程就会造成负数情况
+    		this.wait();
+    	}
+    	catch(Exception e) {
+    		e.printStackTrace();
+    	}
+    	
+    	this.notify();
+    	System.out.printf("%s 减血1点,减少血后，%s的血量是%.0f%n", name, name, hp);
+    }
+    public synchronized void recover() {
+    	
+//    	if(hp==1000) {
+//    		try {
+//				this.wait();
+//			} catch (InterruptedException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//    	}
+    	hp+=1;
+		System.out.printf("%s 回血1点,增加血后，%s的血量是%.0f%n", name, name, hp);
+    	this.notify();
+    }
     public void run() {
     	cnt=1;
     	while(true) {
