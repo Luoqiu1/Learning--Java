@@ -54,7 +54,9 @@ public class TestThread {
         GeneratePasswordLog tLog=new GeneratePasswordLog(midAns);
 //        tLog.setDaemon(true);
         tLog.start();
-        new Thread(new GeneratePasswordThread(guessPassword,password,midAns)).start();
+        Thread t=new Thread(new GeneratePasswordThread(guessPassword,password,midAns));
+//        t.setDaemon(true);
+        t.start();
 //        generatePassword(guessPassword,password);
         
     }
