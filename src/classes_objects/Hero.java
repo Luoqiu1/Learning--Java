@@ -17,9 +17,9 @@ public class Hero extends Thread implements Mortal,Serializable,LOL,Runnable{
     int cnt;
     static String copyright="版权由拳头公司所有";
     public synchronized void hurt() {
-    	hp-=1;
+    	
 //    	if(hp<=1)try {
-    	while(hp<=50)try {
+    	while(hp<=1)try {
     		//重复查看
     		//因为当线程被唤醒后如果是减血线程就会造成负数情况
     		this.wait();
@@ -27,7 +27,7 @@ public class Hero extends Thread implements Mortal,Serializable,LOL,Runnable{
     	catch(Exception e) {
     		e.printStackTrace();
     	}
-    	
+    	hp-=1;
     	this.notify();
     	System.out.printf("%s 减血1点,减少血后，%s的血量是%.0f%n", name, name, hp);
     }
