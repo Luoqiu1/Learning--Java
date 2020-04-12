@@ -1,5 +1,8 @@
 package classes_objects;
 import java.util.Collections;
+import java.util.concurrent.locks.ReentrantLock;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.Condition;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Collection;
@@ -13,11 +16,18 @@ public class MyStack<T> implements Stack<T>{
 //		Heros=(List<Hero>)Collections.synchronizedList(Heros);
 //		Heros=Collections.synchronizedList(Heros);
 	}
-	public synchronized void push(T v) {
+	Lock lock=new ReentrantLock();
+	Condition condition=lock.newCondition();
+//	public synchronized void push(T v) {
+	public void push(T v) {
+		try {
+			lock.lock();
 		while(list.size()==200) {
 			System.out.println("货满200啦！！！休息下");
 			try {
-				this.wait();
+//				this.wait();
+				
+				condition.await();
 			}
 			catch(Exception e) {
 				e.printStackTrace();
@@ -26,7 +36,12 @@ public class MyStack<T> implements Stack<T>{
 //		Heros.addLast(h);
 //		Heros.offer(h);
 		list.add(v);
-		this.notify();
+//		this.notify();
+		condition.signal();
+		}
+		finally {
+			lock.unlock();
+		}
 		//同pull方法一个道理。notify要放在具体操作之后！
 		
 		//notifyAll的理解也加深了一层！
@@ -40,15 +55,21 @@ public class MyStack<T> implements Stack<T>{
 		//notify跟notify成套用！
 		//只要出现一个notifyAll即起到了全部notifyAll的竞争效果！
 	}
-	public synchronized T pull(){
+//	public synchronized T pull(){
+	public T pull() {
+		T temp;
+		try {
+			lock.lock();
 		while(list.isEmpty()) {
 			System.out.println("空货啦！！！客人请稍等！！");
 			try {
-				this.wait();
-			} catch (InterruptedException e) {
+//				this.wait();
+				condition.await();
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
+		
 	//	this.notify();
 	//	return list.remove(list.size()-1);
 		//如果是上面这两行的代码设计格式
@@ -64,9 +85,18 @@ public class MyStack<T> implements Stack<T>{
 		//所以这种设计模式是存在系统缺陷的！
 		//因为this.notify无法放在return后面！
 		//所以return语句要拆开
-		T temp=list.remove(list.size()-1);
-		this.notify();//notify要放在remove之后！
+//		temp=list.remove(list.size()-1);
+//		this.notify();//notify要放在remove之后！
 		//这样就保证就算唤醒的是pull方法，也会因为条件满足空而继续保留在while中！
+		temp=list.remove(list.size()-1);
+//		this.notify();//notify要放在remove之后！
+		condition.signal();
+		}
+		finally {
+			lock.unlock();
+			
+
+		}
 		return temp;
 	}
 	public T peek(){
