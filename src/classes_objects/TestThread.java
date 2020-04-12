@@ -24,24 +24,66 @@ public class TestThread {
 			}
 		}
 	}
-    
-    public static void main(String[] args) {
- 
-    	final Hero gareen = new Hero();
-        gareen.name = "¸ÇÂ×";
-        gareen.hp = 616;
-        HurtThread tHurt[]=new HurtThread[5];
-        RecoverThread rHurt[]=new RecoverThread[2];
-        for(HurtThread t:tHurt) {
-        	t=new HurtThread(gareen);
-        	t.start();
-        }
-        for(RecoverThread t:rHurt) {
-        	t=new RecoverThread(gareen);
-        	t.start();
-        }
-    	
+    static class Producer implements Runnable{
+    	private MyStack<Character> stack;
+    	private String name;
+    	public Producer(String name,MyStack<Character>  stack) {
+    		this.stack=stack;
+    		this.name=name;
+    	}
+    	private char randomChar() {
+    		while(true) {
+    			char c=(char)((int)(Math.random()*100+50));
+    			if(Character.isLetter(c)&&c==Character.toUpperCase((char)c))return c;
+    		}
+    	}
+		public void run() {
+			while(true) {
+				char c=this.randomChar();
+				stack.push(c);
+				System.out.println(name+" Ñ¹Èë£º"+c);
+				try {
+					Thread.sleep(1000);
+				}
+				catch(Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
     	
     }
-        
+    static class Consumer extends Thread{
+    	private MyStack<Character>  stack;
+    	private String name;
+    	public Consumer(String name,MyStack<Character>  stack) {
+    		this.stack=stack;
+    		this.name=name;
+    	}
+    	public void run() {
+    		while(true) {
+	    		char c=(char)stack.poll();
+	    		System.out.println(name+" µ¯³ö£º"+c);
+	    		try {
+					Thread.sleep(1000);
+				}
+				catch(Exception e) {
+					e.printStackTrace();
+				}
+    		}
+    	}
+    }
+    public static void main(String[] args) {
+    	MyStack<Character> stack=new MyStack<>();
+    	Producer producer[]=new Producer[35];
+    	Thread consumer[]=new Consumer[20];
+    	for(int i=1;i<=producer.length;++i) {
+    		producer[i-1]=new Producer("Producer"+i,stack);
+    		new Thread(producer[i-1]).start();
+    	}
+    	for(int i=1;i<=consumer.length;++i) {
+    		consumer[i-1]=new Consumer("Producer"+i,stack);
+    		consumer[i-1].start();
+    	}
+    }
+    
 }

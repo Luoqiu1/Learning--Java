@@ -1,7 +1,7 @@
 package classes_objects;
 
-public interface Stack {
-	public void push(Hero h);
-	public Hero poll();
-	public Hero peek();
+public interface Stack<T> {
+	public void push(T v);
+	public T poll();
+	public T peek();
 }
