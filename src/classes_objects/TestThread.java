@@ -61,7 +61,7 @@ public class TestThread {
     	}
     	public void run() {
     		while(true) {
-	    		char c=(char)stack.poll();
+	    		char c=(char)stack.pull();
 	    		System.out.println(name+" µ¯³ö£º"+c);
 	    		try {
 					Thread.sleep(1000);
@@ -74,11 +74,19 @@ public class TestThread {
     }
     public static void main(String[] args) {
     	MyStack<Character> stack=new MyStack<>();
-    	Producer producer[]=new Producer[35];
+//    	Producer producer[]=new Producer[20];
+    	List<Producer> producer=new ArrayList<>();
+    	int n=35;
+    	
     	Thread consumer[]=new Consumer[20];
-    	for(int i=1;i<=producer.length;++i) {
-    		producer[i-1]=new Producer("Producer"+i,stack);
-    		new Thread(producer[i-1]).start();
+//    	for(int i=1;i<=producer.length;++i) {
+//    		producer[i-1]=new Producer("Producer"+i,stack);
+//    		new Thread(producer[i-1]).start();
+//    	}
+    	for(int i=1;i<=n;++i) {
+    		Producer p=new Producer("Producer"+i,stack);
+    		producer.add(p);
+    		new Thread(producer.get(i-1)).start();
     	}
     	for(int i=1;i<=consumer.length;++i) {
     		consumer[i-1]=new Consumer("Producer"+i,stack);

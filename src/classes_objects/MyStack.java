@@ -40,7 +40,7 @@ public class MyStack<T> implements Stack<T>{
 		//notify跟notify成套用！
 		//只要出现一个notifyAll即起到了全部notifyAll的竞争效果！
 	}
-	public synchronized T poll(){
+	public synchronized T pull(){
 		while(list.isEmpty()) {
 			System.out.println("空货啦！！！客人请稍等！！");
 			try {
@@ -81,7 +81,7 @@ public class MyStack<T> implements Stack<T>{
 		}
 		for (int i = 0; i < 5; i++) {
 			System.out.println(ms.peek());
-			Hero h=ms.poll();
+			Hero h=ms.pull();
 			System.out.println(h);
 		}
 	}
