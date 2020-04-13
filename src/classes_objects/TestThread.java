@@ -142,11 +142,18 @@ public class TestThread {
             }
         };
         t1.start();
-          
+        //能够理解用lock的设计思路了！
+        //每一个lock都需要单独的一个try
+        //因为这样的话每一个lock都可以分配到一个finally！
+        //也就是说每一个lock都可以保证能够被unlock！
+        
+        //而不是之前的那种想法说
+        //一个try就够了，不会报错
+        //不是为了不报错而写的try！这点思想要转变！
+        //而是为了保证每一个lock都能解锁unlock！！
         try {
 			Thread.sleep(100);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
           
