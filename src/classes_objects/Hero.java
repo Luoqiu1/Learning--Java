@@ -1,5 +1,6 @@
 package classes_objects;
 import java.io.Serializable;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -10,16 +11,18 @@ import java.io.File;
 public class Hero extends Thread implements Mortal,Serializable,LOL,Runnable{
 	private static final long serialVersionUID=1l;
 	String name; //姓名
-    float hp; //血量     
+//    float hp; //血量     
+	AtomicInteger hp=new AtomicInteger();
     float armor; //护甲
     int moveSpeed; //移动速度     
     int damage;
     int cnt;
     static String copyright="版权由拳头公司所有";
-    public synchronized void hurt() {
-    	
+//    public synchronized void hurt() {
+    public void hurt() {
 //    	if(hp<=1)try {
-    	while(hp<=1)try {
+//    	while(hp<=1)try {
+    	while(hp.get()<=1)try {
     		//重复查看
     		//因为当线程被唤醒后如果是减血线程就会造成负数情况
     		this.wait();
@@ -27,12 +30,13 @@ public class Hero extends Thread implements Mortal,Serializable,LOL,Runnable{
     	catch(Exception e) {
     		e.printStackTrace();
     	}
-    	hp-=1;
-    	this.notify();
-    	System.out.printf("%s 减血1点,减少血后，%s的血量是%.0f%n", name, name, hp);
+//    	hp-=1;
+    	hp.decrementAndGet();
+//    	this.notify();
+    	System.out.printf("%s 减血1点,减少血后，%s的血量是%.0f%n", name, name, hp.floatValue());
     }
-    public synchronized void recover() {
-    	
+//    public synchronized void recover() {
+    public void recover() {
 //    	if(hp==1000) {
 //    		try {
 //				this.wait();
@@ -41,9 +45,10 @@ public class Hero extends Thread implements Mortal,Serializable,LOL,Runnable{
 //				e.printStackTrace();
 //			}
 //    	}
-    	hp+=1;
-		System.out.printf("%s 回血1点,增加血后，%s的血量是%.0f%n", name, name, hp);
-    	this.notify();
+//    	hp+=1;
+    	hp.incrementAndGet();
+		System.out.printf("%s 回血1点,增加血后，%s的血量是%.0f%n", name, name, hp.floatValue());
+//    	this.notify();
     }
     public void run() {
     	cnt=1;
