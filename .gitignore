@@ -1,1 +1,5 @@
 /bin/
+*.rar
+*.jar
+*.msi
+*.exe
