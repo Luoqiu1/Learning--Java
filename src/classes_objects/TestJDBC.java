@@ -84,36 +84,89 @@ public class TestJDBC{
 		
 //		list(6,10);
 		
+//		try {
+//			Class.forName("com.mysql.jdbc.Driver");
+//		} catch (ClassNotFoundException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
+////		String sql="insert into hero values(?,'牛牛',?,?)";
+//		String sql="select * from user where name=? and password=?";
+////		String sql="delete from hero where id=?";
+//		try(Connection c=DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/"+
+//				"how2java?characterEncoding=UTF-8","root","admin");
+//				PreparedStatement ps=c.prepareStatement(sql)){
+//		//	for(int i=20;i<=100;++i) {
+////				ps.setInt(1, 26);
+////				ps.setFloat(2,2.33f);
+////				ps.setInt(3,66);
+//		//		ps.execute();
+//				
+//				ps.setString(1,"dashen");
+//				ps.setString(2, "thisispassword;delete from user;");
+//				//这两行的测试很好说明了
+//				//PreparedStatement对sql注入式攻击的安全处理！
+//				//是把参数看成一个整体
+//				//而不是直接原封不动地像Statement那样把语句写上去执行！
+//				System.out.println(ps.toString());
+		//	}
+		Thread T1=new Thread() {
+			public void run() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 		} catch (ClassNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-//		String sql="insert into hero values(?,'牛牛',?,?)";
-		String sql="select * from user where name=? and password=?";
-//		String sql="delete from hero where id=?";
+		long t1=System.currentTimeMillis();
+		String sql="insert into user values(?,?,?)";
 		try(Connection c=DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/"+
 				"how2java?characterEncoding=UTF-8","root","admin");
-				PreparedStatement ps=c.prepareStatement(sql)){
-		//	for(int i=20;i<=100;++i) {
-//				ps.setInt(1, 26);
-//				ps.setFloat(2,2.33f);
-//				ps.setInt(3,66);
-		//		ps.execute();
-				
-				ps.setString(1,"dashen");
-				ps.setString(2, "thisispassword;delete from user;");
-				//这两行的测试很好说明了
-				//PreparedStatement对sql注入式攻击的安全处理！
-				//是把参数看成一个整体
-				//而不是直接原封不动地像Statement那样把语句写上去执行！
-				System.out.println(ps.toString());
-		//	}
+				PreparedStatement ps=c.prepareStatement(sql);){
+			for (int i = 1; i <= 10000; i++) {
+				ps.setInt(1, i);
+				ps.setString(2, "Hero"+i);
+				ps.setString(3, "h"+i);
+				ps.execute();
+			}
 		}
 		catch(Exception e) {
 			e.printStackTrace();
 		}
+		long t2=System.currentTimeMillis();
+		System.out.println("使用预编译Statement处理时间为："+(t2-t1));
+			}
+		};
+		
+		Thread T2=new Thread() {
+			public void run() {
+				try {
+					Class.forName("com.mysql.jdbc.Driver");
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				long t2=System.currentTimeMillis();
+		try(Connection c=DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/"+
+				"how2java?characterEncoding=UTF-8","root","admin");
+				Statement s=c.createStatement()){
+			for (int i = 10001; i <= 20000; i++) {
+				String temp="insert into user values("
+						+ i+",'Hero"+i+"','h"+i+"')";
+//				System.out.println(temp);
+				s.execute(temp);
+			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		long t3=System.currentTimeMillis();
+		System.out.println("使用Statement处理时间为："+(t3-t2));
+		
+			}
+		};
+		T1.start();
+		T2.start();
 	}
 	public static void list(int start,int count) {
 		try {
