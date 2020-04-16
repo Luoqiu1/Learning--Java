@@ -1,6 +1,7 @@
 package classes_objects;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.ResultSet;
@@ -79,7 +80,40 @@ public class TestJDBC{
 //			if(e instanceof SQLException)
 //			e.printStackTrace();
 //		}
-		list(6,10);
+		
+		
+//		list(6,10);
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+//		String sql="insert into hero values(?,'牛牛',?,?)";
+		String sql="select * from user where name=? and password=?";
+//		String sql="delete from hero where id=?";
+		try(Connection c=DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/"+
+				"how2java?characterEncoding=UTF-8","root","admin");
+				PreparedStatement ps=c.prepareStatement(sql)){
+		//	for(int i=20;i<=100;++i) {
+//				ps.setInt(1, 26);
+//				ps.setFloat(2,2.33f);
+//				ps.setInt(3,66);
+		//		ps.execute();
+				
+				ps.setString(1,"dashen");
+				ps.setString(2, "thisispassword;delete from user;");
+				//这两行的测试很好说明了
+				//PreparedStatement对sql注入式攻击的安全处理！
+				//是把参数看成一个整体
+				//而不是直接原封不动地像Statement那样把语句写上去执行！
+				System.out.println(ps.toString());
+		//	}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 	public static void list(int start,int count) {
 		try {
