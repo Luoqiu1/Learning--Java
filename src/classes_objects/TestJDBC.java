@@ -110,63 +110,106 @@ public class TestJDBC{
 //				//而不是直接原封不动地像Statement那样把语句写上去执行！
 //				System.out.println(ps.toString());
 		//	}
-		Thread T1=new Thread() {
-			public void run() {
+		
+		
+//		Thread T1=new Thread() {
+//			public void run() {
+//		try {
+//			Class.forName("com.mysql.jdbc.Driver");
+//		} catch (ClassNotFoundException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
+//		long t1=System.currentTimeMillis();
+//		String sql="insert into user values(?,?,?)";
+//		try(Connection c=DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/"+
+//				"how2java?characterEncoding=UTF-8","root","admin");
+//				PreparedStatement ps=c.prepareStatement(sql);){
+//			for (int i = 1; i <= 10000; i++) {
+//				ps.setInt(1, i);
+//				ps.setString(2, "Hero"+i);
+//				ps.setString(3, "h"+i);
+//				ps.execute();
+//			}
+//		}
+//		catch(Exception e) {
+//			e.printStackTrace();
+//		}
+//		long t2=System.currentTimeMillis();
+//		System.out.println("使用预编译Statement处理时间为："+(t2-t1));
+//			}
+//		};
+//		
+//		Thread T2=new Thread() {
+//			public void run() {
+//				try {
+//					Class.forName("com.mysql.jdbc.Driver");
+//				} catch (ClassNotFoundException e1) {
+//					// TODO Auto-generated catch block
+//					e1.printStackTrace();
+//				}
+//				long t2=System.currentTimeMillis();
+//		try(Connection c=DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/"+
+//				"how2java?characterEncoding=UTF-8","root","admin");
+//				Statement s=c.createStatement()){
+//			for (int i = 10001; i <= 20000; i++) {
+//				String temp="insert into user values("
+//						+ i+",'Hero"+i+"','h"+i+"')";
+////				System.out.println(temp);
+//				s.execute(temp);
+//			}
+//		}
+//		catch(Exception e) {
+//			e.printStackTrace();
+//		}
+//		long t3=System.currentTimeMillis();
+//		System.out.println("使用Statement处理时间为："+(t3-t2));
+//		
+//			}
+//		};
+//		T1.start();
+//		T2.start();
+		
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 		} catch (ClassNotFoundException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		long t1=System.currentTimeMillis();
-		String sql="insert into user values(?,?,?)";
+		String sql="insert into hero values(null,?,40,40)";
 		try(Connection c=DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/"+
 				"how2java?characterEncoding=UTF-8","root","admin");
-				PreparedStatement ps=c.prepareStatement(sql);){
-			for (int i = 1; i <= 10000; i++) {
-				ps.setInt(1, i);
-				ps.setString(2, "Hero"+i);
-				ps.setString(3, "h"+i);
-				ps.execute();
-			}
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-		}
-		long t2=System.currentTimeMillis();
-		System.out.println("使用预编译Statement处理时间为："+(t2-t1));
-			}
-		};
-		
-		Thread T2=new Thread() {
-			public void run() {
-				try {
-					Class.forName("com.mysql.jdbc.Driver");
-				} catch (ClassNotFoundException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+				PreparedStatement ps=c.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS)){
+			ps.setString(1, "哦牛");
+			ps.execute();
+			ResultSet rs=ps.getGeneratedKeys();
+			//注意这里！！必须要有 rs.next()
+			//就如同迭代器iterator中，使用if(it.next())一样
+			//首先判断是否存在这个东西，防止非法访问
+			//其次就是rs自增一步后，正式走到第一个可以访问的元素！
+			//一开始这类像指针一样的东西都是在可能出现第一个可以访问的元素
+			//的前一个位置！
+			if(rs.next()) {
+				int i=rs.getInt(1);
+		//		System.out.println(rs);
+				while(true) {
+					--i;
+					if(i==0)break;
+					String sqltemp="select * from hero where id="+i;
+					boolean flag=ps.execute(sqltemp);
+					//可以将PrepareStatement当成Statement来用
+					//参数位置放入一个String sql来执行！
+					//就不用重新再创建一个Statement了
+					if(flag) {
+						sqltemp="delete from hero where id="+i;
+						ps.execute(sqltemp);
+						break;
+					}
 				}
-				long t2=System.currentTimeMillis();
-		try(Connection c=DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/"+
-				"how2java?characterEncoding=UTF-8","root","admin");
-				Statement s=c.createStatement()){
-			for (int i = 10001; i <= 20000; i++) {
-				String temp="insert into user values("
-						+ i+",'Hero"+i+"','h"+i+"')";
-//				System.out.println(temp);
-				s.execute(temp);
 			}
 		}
 		catch(Exception e) {
 			e.printStackTrace();
 		}
-		long t3=System.currentTimeMillis();
-		System.out.println("使用Statement处理时间为："+(t3-t2));
-		
-			}
-		};
-		T1.start();
-		T2.start();
 	}
 	public static void list(int start,int count) {
 		try {
