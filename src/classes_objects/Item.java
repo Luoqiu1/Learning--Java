@@ -2,6 +2,7 @@ package classes_objects;
 
 //public abstract class Item implements LOL {
 public class Item implements LOL,Comparable<Item> {
+	int id;
 	int price;
 	String name;
 //	public abstract boolean disposable();
