@@ -6,6 +6,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class TestJDBC{
@@ -268,48 +270,61 @@ public class TestJDBC{
 //		catch(Exception e) {
 //			e.printStackTrace();
 //		}
-		try {
-            Class.forName("com.mysql.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-         
-        try (Connection c = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/how2java?characterEncoding=UTF-8",
-                "root", "admin");
-                Statement st4Query = c.createStatement();
-                Statement st4Delete = c.createStatement();
-                Scanner s = new Scanner(System.in);) {
- 
-            //把自动提交关闭
-            c.setAutoCommit(false);
-            //查出前10条
-            ResultSet rs =st4Query.executeQuery("select id from Hero order by id asc limit 0,10 ");
-            while(rs.next()){
-                int id = rs.getInt(1);
-                System.out.println("试图删除id="+id+" 的数据");
-                st4Delete.execute("delete from Hero where id = " +id);
-            }
-             
-            //是否删除这10条
-            while(true){
-                System.out.println("是否要删除数据(Y/N)");
-                 
-                String str = s.next();
-                if ("Y".equals(str)) {
-                    //如果输入的是Y，则提交删除操作
-                    c.commit();
-                    System.out.println("提交删除");
-                    break;
-                } else if ("N".equals(str)) {
-                    System.out.println("放弃删除");
-                    break;
-                }
-            }
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
- 
+//		
+		
+		
+		
+//		try {
+//            Class.forName("com.mysql.jdbc.Driver");
+//        } catch (ClassNotFoundException e) {
+//            e.printStackTrace();
+//        }
+//         
+//        try (Connection c = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/how2java?characterEncoding=UTF-8",
+//                "root", "admin");
+//                Statement st4Query = c.createStatement();
+//                Statement st4Delete = c.createStatement();
+//                Scanner s = new Scanner(System.in);) {
+// 
+//            //把自动提交关闭
+//            c.setAutoCommit(false);
+//            //查出前10条
+//            ResultSet rs =st4Query.executeQuery("select id from Hero order by id asc limit 0,10 ");
+//            while(rs.next()){
+//                int id = rs.getInt(1);
+//                System.out.println("试图删除id="+id+" 的数据");
+//                st4Delete.execute("delete from Hero where id = " +id);
+//            }
+//             
+//            //是否删除这10条
+//            while(true){
+//                System.out.println("是否要删除数据(Y/N)");
+//                 
+//                String str = s.next();
+//                if ("Y".equals(str)) {
+//                    //如果输入的是Y，则提交删除操作
+//                    c.commit();
+//                    System.out.println("提交删除");
+//                    break;
+//                } else if ("N".equals(str)) {
+//                    System.out.println("放弃删除");
+//                    break;
+//                }
+//            }
+//        } catch (SQLException e) {
+//            // TODO Auto-generated catch block
+//            e.printStackTrace();
+//        }
+		List<Hero> heros=list();
+		System.out.println(heros);
+		for(Hero h:heros)System.out.println(h);
+		Hero t1=new Hero();t1.id=66;t1.name="我呃呃";t1.hp=6;t1.damage=5;
+		add(t1);
+		Hero t2=new Hero();t2.id=38;
+		delete(t2);
+		List<Hero> heros2=list();
+		System.out.println(heros2);
+		for(Hero h:heros2)System.out.println(h);
     }
 	public static void list(int start,int count) {
 		try {
@@ -335,5 +350,93 @@ public class TestJDBC{
 		catch(Exception e) {
 			e.printStackTrace();
 		}
+	}
+	public static void driver() {
+		try {
+		Class.forName("com.mysql.jdbc.Driver");
+	} catch (ClassNotFoundException e) {
+		e.printStackTrace();
+		}
+	}
+	public static void add(Hero h) {
+		driver();
+		String con="jdbc:mysql://127.0.0.1:3306/how2java?"+
+				"characterEncoding=UTF-8";
+		try(Connection c=DriverManager.getConnection(con,"root","admin");
+				PreparedStatement ps=c.prepareStatement("insert into hero values(?,?,?,?)")){
+			c.setAutoCommit(false);
+			ps.setInt(1, h.id);
+			ps.setString(2, h.name);
+			ps.setInt(3,h.hp);
+			ps.setInt(4, h.damage);
+			ps.execute();
+			c.commit();
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public static void delete(Hero h) {
+		driver();
+		String con="jdbc:mysql://127.0.0.1:3306/how2java?"+
+				"characterEncoding=UTF-8";
+		try(Connection c=DriverManager.getConnection(con,"root","admin");
+				PreparedStatement ps=c.prepareStatement("delete from hero where id=?")){
+			ps.setInt(1, h.id);
+			ps.execute();
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public static void update(Hero h) {
+		driver();
+		String con="jdbc:mysql://127.0.0.1:3306/how2java?"+
+				"characterEncoding=UTF-8";
+		try(Connection c=DriverManager.getConnection(con,"root","admin");
+				PreparedStatement ps=c.prepareStatement("update hero set name=?,hp=?,damage=? where id=?")){
+			c.setAutoCommit(false);
+			ps.setInt(4, h.id);
+			ps.setString(1, h.name);
+			ps.setInt(2,h.hp);
+			ps.setInt(3, h.damage);
+			c.commit();
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public static List<Hero> list() {
+		List<Hero> heros=new ArrayList<>();
+		driver();
+		String con="jdbc:mysql://127.0.0.1:3306/how2java?"+
+				"characterEncoding=UTF-8";
+		try(Connection c=DriverManager.getConnection(con,"root","admin");
+				PreparedStatement ps=c.prepareStatement("select name,hp,damage from hero where id=?")){
+			Statement s=c.createStatement();
+			s.execute("select count(*) from hero");
+			ResultSet rs1=s.getResultSet();
+			if(rs1.next()) {
+				int n=rs1.getInt(1);
+				for(int i=0,k=0;k<n;++i) {
+					ps.setInt(1, i);
+//					System.out.println(ps);
+					ps.execute();
+					ResultSet rs=ps.getResultSet();
+					if(rs.next()) {
+						Hero temp=new Hero();
+						temp.id=i;temp.name=rs.getString(1);
+						temp.hp=rs.getInt(2);temp.damage=rs.getInt(3);
+						heros.add(temp);
+						++k;
+					}
+				}
+			}
+			
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		return heros;
 	}
 }

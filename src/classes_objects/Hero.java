@@ -12,11 +12,13 @@ public class Hero extends Thread implements Mortal,Serializable,LOL,Runnable{
 	private static final long serialVersionUID=1l;
 	String name; //姓名
 //    float hp; //血量     
-	AtomicInteger hp=new AtomicInteger();
+//	AtomicInteger hp=new AtomicInteger();
+	int hp;
     float armor; //护甲
     int moveSpeed; //移动速度     
     int damage;
     int cnt;
+    int id;
     static String copyright="版权由拳头公司所有";
 //    public synchronized void hurt() {
     public void hurt() {
