@@ -4,10 +4,17 @@ import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -286,26 +293,165 @@ public class TestGUI {
 //		f.add(cb2);
 //		finish(f);
 		
+//		JFrame f=new JFrame("LOL");
+//		init(f);
+//		JRadioButton rb=new JRadioButton("我呃呃");
+//		rb.setSelected(true);
+//		rb.setBounds(50,50,130,30);
+//		JRadioButton rb2=new JRadioButton();
+//		rb2.setSize(130,30);
+//		rb2.setLocation(50,100);
+//	//	rb2.setBounds(50, 100, 130, 30);
+//		rb2.setText("牛牛");
+//		ButtonGroup bg=new ButtonGroup();
+//		bg.add(rb);bg.add(rb2);
+//		f.add(rb);f.add(rb2);
+//		finish(f);
+		
+//		JFrame f=new JFrame("LOL");
+//		init(f);
+//		String s[]=new String[] {"?e","我呃呃","牛牛"};
+//		JComboBox cbox=new JComboBox(s);
+//		cbox.setBounds(50,50,130,30);
+//		f.add(cbox);
+//		finish(f);
+		
+		/*
+		 * JFrame f=new JFrame("LOL"); init(f); finish(f);
+		 */
+//		int ok=JOptionPane.showConfirmDialog(f, "是否要呃呃？");
+//		if(JOptionPane.OK_OPTION==ok) {
+//			System.out.println(ok);
+//			String s=JOptionPane.showInputDialog(f,"请输入呃呃");
+//			if(s.equals("我呃呃")) {
+//				JOptionPane.showMessageDialog(f, "不许呃呃");	
+//			}
+//		}
+////		else System.out.println(ok);
+//		else if(1==ok) {
+//			JOptionPane.showMessageDialog(f, "好滴，，");
+//		}
+		
+//		JFrame f=new JFrame("LOL");
+//		initFlow(f);
+//		JTextField tf1=new JTextField("请输入账号");
+////		tf1.setPreferredSize(new Dimension(130,40));
+//	//	tf1.setSize(130,40);
+//		JTextField tf2=new JTextField("请输入密码");
+//	//	tf2.setPreferredSize(new Dimension(130,40));
+//		JLabel l1=new JLabel("账号");
+//	//	l1.setSize(100,100);
+//		JLabel l2=new JLabel("密码");
+//	//	l2.setSize(50,50);
+//		f.add(l1);f.add(tf1);
+//		f.add(l2);f.add(tf2);
+//		finish(f);
+		
+//		JFrame f=new JFrame("LOL");
+//		initFlow(f);
+//		JPasswordField pd=new JPasswordField();
+//		pd.setText("我疯狂呃呃666");
+//		JLabel l=new JLabel("密码：");
+//		pd.grabFocus();
+//		pd.setPreferredSize(new Dimension(130,40));
+//		f.add(l);f.add(pd);
+//		finish(f);
+//		char s[]=pd.getPassword();
+//	//	String xx=pd.getText();
+//		//安全性问题。JPasswordField应该用getPassword方法
+//		String x=new String(s);
+//		System.out.println("密码是："+x);
+//	//	System.out.println("密码是："+xx);
+		
+//		JFrame f=new JFrame("LOL");
+//		initFlow(f);
+//		JLabel l=new JLabel("文本域：");
+//		JTextArea ta=new JTextArea();
+//		ta.setText("我呃呃\n哽哽\r\n哦牛，，,,,,,,,,,");
+//		ta.setPreferredSize(new Dimension(50,100));
+//		f.add(l);f.add(ta);
+//		ta.setLineWrap(true);
+//		finish(f);
+		
+//		JFrame f=new JFrame("LOL");
+//		f.setSize(400,300);
+//		f.setLocation(200,200);
+//		f.setLayout(null);
+//		//布局一定要设置啊！不然就是铺满整个窗口！
+//		JPanel p1=new JPanel();
+//		p1.setBounds(50,50,300,60);
+////		p1.setLayout(new FlowLayout());
+//		// 这一句可以没有，因为JPanel默认就是采用的FlowLayout
+//		
+//		JButton pb1=new JButton("英雄1");
+//		JButton pb2=new JButton("英雄2");
+//		JButton pb3=new JButton("英雄3");
+//		p1.setBackground(Color.BLUE);
+//		p1.add(pb1);p1.add(pb2);p1.add(pb3);
+//		
+//		JPanel p2=new JPanel();
+//		p2.setBounds(10,150,300,60);
+//		p2.setBackground(Color.green);;
+////		p2.setLayout(new GridLayout(3,1));
+//	//	p2.setSize(100,100);
+//		JButton p2b1=new JButton("英雄4");
+//		JButton p2b2=new JButton("英雄5");
+//		JButton p2b3=new JButton("英雄6");
+//		p2.add(p2b1);p2.add(p2b2);p2.add(p2b3);
+//		f.getContentPane().add(p1);
+//		//Frame（门、玻璃等的框架）上面有一层东西，窗玻璃--Pane。
+//		//所以很形象。就是ContentPane 内容玻璃。
+//		//f.add()其实就是在Pane上添加内容
+//		//就是f.getContentPane.add()。
+//		System.out.println(p2b3.getParent());//在基本面板JPanel上
+//		JButton test=new JButton("呃呃");
+//		test.setSize(80,80);
+//		f.add(test);System.out.println(test.getParent());
+//		//打印可以看出，Parent是contentPane！
+//	//	f.add(p1);
+//		f.add(p2);
+//		finish(f);
+		
 		JFrame f=new JFrame("LOL");
-		init(f);
-		JRadioButton rb=new JRadioButton("我呃呃");
-		rb.setSelected(true);
-		rb.setBounds(50,50,130,30);
-		JRadioButton rb2=new JRadioButton();
-		rb2.setSize(130,30);
-		rb2.setLocation(50,100);
-	//	rb2.setBounds(50, 100, 130, 30);
-		rb2.setText("牛牛");
-		ButtonGroup bg=new ButtonGroup();
-		bg.add(rb);bg.add(rb2);
-		f.add(rb);f.add(rb2);
-		finish(f);
+		f.setBounds(200,200,400,300);
+		f.setLayout(null);
+		JTextArea ta=new JTextArea();
+//		ta.setSize(500,100);
+		ta.setLineWrap(true);
+		for (int i = 0; i < 100; i++) {
+			ta.append("dfaoewanoc");
+		}
+	//	f.add(ta);
+		JScrollPane sp=new JScrollPane(ta);
+	//	sp.setSize(200,200);
+	//	f.add(sp);
+//		f.setContentPane(sp);
+		f.setContentPane(ta);
+		//如果用其他pane代替了contentPane，似乎Frame不设置Layout也可显示内容
+		//似乎有点理解了
+		//因为本身Frame作为一个最基本的容器
+		//自身上带有一层Pane，这个Pane肯定得是空的
+		//以便来放其他的组件！
+		//若直接将其他Pane替换掉这个空的contentPane
+		//这个用来替换的Pane上如果有内容，自然而然就会显示！
+		
+		//缺点就是不能起到通过这个contentPane达到布局的作用了！
+		//直接Frame.add是在contentPane上add！
+		
+		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		f.setVisible(true);
 	}
 	public static void init(JFrame f) {
 //		f.setSize(400,300);
 //		f.setLocation(200,200);
 		f.setBounds(200,200,400,300);
 		f.setLayout(null);
+	}
+	public static void initFlow(JFrame f) {
+//		f.setSize(400,300);
+//		f.setLocation(200,200);
+		f.setBounds(200,200,400,300);
+		f.setLayout(new FlowLayout());
 	}
 	public static void finish(JFrame f) {
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
