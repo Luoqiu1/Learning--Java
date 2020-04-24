@@ -1,11 +1,18 @@
 package classes_objects;
 
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JRadioButton;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -172,49 +179,136 @@ public class TestGUI {
 //			}
 //		});
 		
+//		JFrame f=new JFrame("LOL");
+//		f.setSize(400,300);
+//		f.setLocation(200,200);
+//		f.setLayout(null);
+//		JButton b=new JButton("打开一个模态窗口");
+//		b.setBounds(50,50,280,30);
+//		f.add(b);
+//		ActionListener listener1=new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				JDialog d=new JDialog(f,"模态窗口");
+//			//	d.setTitle("模态窗口");
+//				
+//			//	d.setLocation(f.getX()+120,f.getY()+130);
+//				d.setLocationRelativeTo(f);
+//				//设置窗口相对于指定组件的位置。
+//				
+//				d.setSize(200,150);
+//			//	d.setLayout(null);
+//				d.setModal(true);
+//				JButton b=new JButton("锁定大小");
+//			//	b.setBounds(50,50,280,30);
+//				//当窗口没有被设置为绝对布局时
+//				//按钮会被填充完整个窗口
+//				//所以这一行有没有都不影响最终效果
+//				//从逻辑上来说也没必要写
+//				
+//				d.add(b);
+//				ActionListener listener=new ActionListener() {
+//					boolean flag=false;
+//					public void actionPerformed(ActionEvent e) {
+//						flag=!flag;
+//						d.setResizable(flag);
+//					}
+//				};
+//				b.addActionListener(listener);
+//				d.setVisible(true);
+//		//		d.setDefaultCloseOperation(JDialog.EXIT_ON_CLOSE);
+//				//只有一个窗口需要设置这个
+//				//被设置的窗口若被关闭，则程序结束！
+//			}
+//		};
+//		b.addActionListener(listener1);
+//		f.setVisible(true);
+//		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		
+		
+//		JFrame f=new JFrame("计算器呃呃");
+//		f.setSize(400,300);
+//		f.setLocation(200,200);
+//		int gap=10;
+//		f.setLayout(new GridLayout(4,5,gap,gap));
+////		f.setLayout(new FlowLayout(100,100,100));
+//		JButton b;
+//		
+//		String set[]=new String[] {"7","8","9","/","sq","4","5","6","*","%"
+//				,"1","2","3","-","1/x","0","+/-",".","+","="};
+//		for(String s:set) {
+//			b=new JButton(s);
+////			b.setPreferredSize(new Dimension(180,40));
+//			b.setPreferredSize(new Dimension(80,80));
+//			f.add(b);
+//		}
+//		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		f.setVisible(true);
+		
+		
+//		JFrame f = new JFrame("LoL");
+//        f.setSize(400, 300);
+//        f.setLocation(200, 200);
+//        f.setLayout(new FlowLayout());
+// 
+//        JButton b1 = new JButton("英雄1");
+//        JButton b2 = new JButton("英雄2");
+//        JButton b3 = new JButton("英雄3");
+// 
+//        // 即便 使用 布局器 ，也可以 通过setPreferredSize，向布局器建议该组件显示的大小
+//        b3.setPreferredSize(new Dimension(180, 40));
+// 
+//        f.add(b1);
+//        f.add(b2);
+//        f.add(b3);
+// 
+//        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+// 
+//        f.setVisible(true);
+		
+//		JFrame f=new JFrame("LOL");
+//		init(f);
+//		JCheckBox cb=new JCheckBox();
+//		String s=new String("我呃呃");
+//		cb.setBounds(50, 50, 130, 30);
+//		cb.setSelected(true);
+//		//一定要记得设置范围！
+//		//这四个参数分别是位置x,位置y,宽度，高度
+//		//没有设置宽度、高度相当于设置为0！
+//		//所以就会看不见，不显示！
+		
+		//相当于setSize、setLocation！
+//		
+//		cb.setText(s);
+//		f.add(cb);
+//		JCheckBox cb2=new JCheckBox("牛牛");
+//		cb2.setBounds(50, 100, 130, 30);
+//		f.add(cb2);
+//		finish(f);
+		
 		JFrame f=new JFrame("LOL");
-		f.setSize(400,300);
-		f.setLocation(200,200);
+		init(f);
+		JRadioButton rb=new JRadioButton("我呃呃");
+		rb.setSelected(true);
+		rb.setBounds(50,50,130,30);
+		JRadioButton rb2=new JRadioButton();
+		rb2.setSize(130,30);
+		rb2.setLocation(50,100);
+	//	rb2.setBounds(50, 100, 130, 30);
+		rb2.setText("牛牛");
+		ButtonGroup bg=new ButtonGroup();
+		bg.add(rb);bg.add(rb2);
+		f.add(rb);f.add(rb2);
+		finish(f);
+	}
+	public static void init(JFrame f) {
+//		f.setSize(400,300);
+//		f.setLocation(200,200);
+		f.setBounds(200,200,400,300);
 		f.setLayout(null);
-		JButton b=new JButton("打开一个模态窗口");
-		b.setBounds(50,50,280,30);
-		f.add(b);
-		ActionListener listener1=new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JDialog d=new JDialog(f,"模态窗口");
-			//	d.setTitle("模态窗口");
-				
-			//	d.setLocation(f.getX()+120,f.getY()+130);
-				d.setLocationRelativeTo(f);
-				//设置窗口相对于指定组件的位置。
-				
-				d.setSize(200,150);
-			//	d.setLayout(null);
-				d.setModal(true);
-				JButton b=new JButton("锁定大小");
-			//	b.setBounds(50,50,280,30);
-				//当窗口没有被设置为绝对布局时
-				//按钮会被填充完整个窗口
-				//所以这一行有没有都不影响最终效果
-				//从逻辑上来说也没必要写
-				
-				d.add(b);
-				ActionListener listener=new ActionListener() {
-					boolean flag=false;
-					public void actionPerformed(ActionEvent e) {
-						flag=!flag;
-						d.setResizable(flag);
-					}
-				};
-				b.addActionListener(listener);
-				d.setVisible(true);
-		//		d.setDefaultCloseOperation(JDialog.EXIT_ON_CLOSE);
-				//只有一个窗口需要设置这个
-				//被设置的窗口若被关闭，则程序结束！
-			}
-		};
-		b.addActionListener(listener1);
-		f.setVisible(true);
+	}
+	public static void finish(JFrame f) {
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		f.setVisible(true);
 	}
 }
