@@ -13,15 +13,20 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.File;
@@ -412,34 +417,177 @@ public class TestGUI {
 //		f.add(p2);
 //		finish(f);
 		
+//		JFrame f=new JFrame("LOL");
+//		f.setBounds(200,200,400,300);
+//		f.setLayout(null);
+//		JTextArea ta=new JTextArea();
+////		ta.setSize(500,100);
+//		ta.setLineWrap(true);
+//		for (int i = 0; i < 100; i++) {
+//			ta.append("dfaoewanoc");
+//		}
+//	//	f.add(ta);
+//		JTextArea ta2=new JTextArea();
+////		ta.setSize(500,100);
+//		ta.setLineWrap(true);
+//		for (int i = 0; i < 100; i++) {
+//			ta2.append("d123415");
+//		}
+//		ta2.setLineWrap(true);
+//		JScrollPane sp=new JScrollPane(ta);
+//		sp.setSize(200,200);
+//	//	sp.setViewportView(ta2);
+//		f.add(sp);
+////		f.setContentPane(sp);
+////		f.setContentPane(ta);
+//		//如果用其他pane代替了contentPane，似乎Frame不设置Layout也可显示内容
+//		//似乎有点理解了
+//		//因为本身Frame作为一个最基本的容器
+//		//自身上带有一层Pane，这个Pane肯定得是空的
+//		//以便来放其他的组件！
+//		//若直接将其他Pane替换掉这个空的contentPane
+//		//这个用来替换的Pane上如果有内容，自然而然就会显示！
+//		
+//		//缺点就是不能起到通过这个contentPane达到布局的作用了！
+//		//直接Frame.add是在contentPane上add！
+//		
+//		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		f.setVisible(true);
+		
+		
+		
+		
+		//CardLayout的show方法等有疑惑。。。
+		
+//		JFrame f=new JFrame("LOL");
+//		f.setBounds(200,200,400,300);
+//		f.setLayout(null);
+//		JPanel p1=new JPanel();
+//	//	p1.setLayout(new FlowLayout());//可有可无。默认是流式布局
+//		JButton h1=new JButton("盖伦");
+//		JButton h2=new JButton("提莫");
+//		JButton h3=new JButton("安妮");
+//		p1.add(h1);p1.add(h2);p1.add(h3);
+//		JPanel card1=new JPanel();
+//		JPanel card2=new JPanel();
+//		JPanel card3=new JPanel();
+////		JLabel l1=new JLabel("gareen");
+////		JLabel l2=new JLabel("annie");
+////		JLabel l3=new JLabel("teemo");
+//		JLabel l1=new JLabel();
+//		JLabel l2=new JLabel();
+//		JLabel l3=new JLabel();
+//		ImageIcon i1=new ImageIcon("C:\\Data\\pics/gareen.jpg");
+//		ImageIcon i2=new ImageIcon("C:\\Data\\pics/annie.jpg");
+//		ImageIcon i3=new ImageIcon("C:\\Data\\pics/teemo.jpg");
+//		l1.setIcon(i1);l3.setIcon(i3);l2.setIcon(i2);
+//		l1.setSize(i1.getIconWidth(),i1.getIconHeight());
+//		l3.setSize(i3.getIconWidth(),i3.getIconHeight());
+//		l2.setSize(i2.getIconWidth(),i2.getIconHeight());
+//		card1.add(l1);card3.add(l3);card2.add(l2);
+//		JPanel cards=new JPanel();
+//		CardLayout cl=new CardLayout();
+//		cards.setLayout(cl);
+//		cards.add(card1,"gareen");cards.add(card2,"annie");cards.add(card3,"teemo");
+//		JSplitPane sp=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,p1,cards);
+//		sp.setDividerLocation(80);
+//	//	f.add(sp);
+//		f.setContentPane(sp);
+//		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		f.setVisible(true);
+//		ActionListener al1=new ActionListener() {
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				// TODO Auto-generated method stub
+//				String name=h1.getText();
+//				cl.show(cards, name);
+//			}
+//		};
+//		
+//		
+//		ActionListener al2=new ActionListener() {
+//
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				// TODO Auto-generated method stub
+//				System.out.println("Here");
+//				String name=h2.getText();
+//				cl.show(cards, name);
+//			}
+//		};
+//		ActionListener al3=new ActionListener() {
+//
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				// TODO Auto-generated method stub
+//			//	String name=h3.getText();
+//				String name=e.getActionCommand();
+//				CardLayout cl=(CardLayout) cards.getLayout();
+//				cl.show(cards, name);
+//			}
+//		};
+//		h1.addActionListener(al1);
+//		h2.addActionListener(al2);
+//		h3.addActionListener(al3);
+		
+		
+		
 		JFrame f=new JFrame("LOL");
 		f.setBounds(200,200,400,300);
 		f.setLayout(null);
-		JTextArea ta=new JTextArea();
-//		ta.setSize(500,100);
-		ta.setLineWrap(true);
-		for (int i = 0; i < 100; i++) {
-			ta.append("dfaoewanoc");
-		}
-	//	f.add(ta);
-		JScrollPane sp=new JScrollPane(ta);
-	//	sp.setSize(200,200);
+		JPanel p1=new JPanel();
+	//	p1.setLayout(new FlowLayout());//可有可无。默认是流式布局
+		JButton h1=new JButton("盖伦");
+		JButton h2=new JButton("提莫");
+		JButton h3=new JButton("安妮");
+		p1.add(h1);p1.add(h2);p1.add(h3);
+		JPanel card=new JPanel();
+		JLabel l=new JLabel();
+		ImageIcon i1=new ImageIcon("C:\\Data\\pics/gareen.jpg");
+		ImageIcon i2=new ImageIcon("C:\\Data\\pics/annie.jpg");
+		ImageIcon i3=new ImageIcon("C:\\Data\\pics/teemo.jpg");
+		l.setIcon(i1);
+		l.setSize(i1.getIconWidth(),i1.getIconHeight());
+		card.add(l);
+		CardLayout cl=new CardLayout();
+		JSplitPane sp=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,p1,card);
+		sp.setDividerLocation(80);
 	//	f.add(sp);
-//		f.setContentPane(sp);
-		f.setContentPane(ta);
-		//如果用其他pane代替了contentPane，似乎Frame不设置Layout也可显示内容
-		//似乎有点理解了
-		//因为本身Frame作为一个最基本的容器
-		//自身上带有一层Pane，这个Pane肯定得是空的
-		//以便来放其他的组件！
-		//若直接将其他Pane替换掉这个空的contentPane
-		//这个用来替换的Pane上如果有内容，自然而然就会显示！
-		
-		//缺点就是不能起到通过这个contentPane达到布局的作用了！
-		//直接Frame.add是在contentPane上add！
-		
+		f.setContentPane(sp);
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setVisible(true);
+		ActionListener al1=new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				l.setIcon(i1);
+				l.setSize(i1.getIconWidth(),i1.getIconHeight());
+			}
+		};
+		
+		
+		ActionListener al2=new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				l.setIcon(i2);
+				l.setSize(i2.getIconWidth(),i2.getIconHeight());
+			}
+		};
+		ActionListener al3=new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+			//	String name=h3.getText();
+				l.setIcon(i3);
+				l.setSize(i3.getIconWidth(),i3.getIconHeight());
+			}
+		};
+		h1.addActionListener(al1);
+		h2.addActionListener(al2);
+		h3.addActionListener(al3);
 	}
 	public static void init(JFrame f) {
 //		f.setSize(400,300);
