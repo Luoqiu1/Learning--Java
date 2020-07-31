@@ -1,10 +1,10 @@
 package classes_objects;
 
-public class APHero extends Hero implements Mortal{
-	public APHero(String a) {
-		name=a;
+public class APHero extends Hero{
+	public void attack() {
+		this.magicAttack();
 	}
-	public void die() {
-		System.out.println("APÓ¢ÐÛËÀµôÈÇ£¬£¬");
-	}
+	 public void magicAttack() {
+	    System.out.println("½øÐÐÄ§·¨¹¥»÷");
+	 }
 }

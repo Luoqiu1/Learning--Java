@@ -1,608 +1,497 @@
 package classes_objects;
 
-import javax.swing.ButtonGroup;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JRadioButton;
-import javax.swing.JScrollPane;
-import javax.swing.JSplitPane;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Writer;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
-public class TestGUI {
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JProgressBar;
+import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
+import javax.swing.JTable;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.JToolBar;
+
+
+public class TestGUI{
 	public static void main(String[] args) {
-//		JFrame jf=new JFrame("LOL");
-//		File f=new File("C:\\Data/location.txt");
-//		String x="200",y="200";
-//		if(f.exists()) {
-//			if(f.length()!=0) {
-//				try(FileInputStream fis=new FileInputStream(f)) {
-//					byte b[]=new byte[(int)f.length()];
-//					fis.read(b);
-//					String s=new String(b);
-//					String s2[]=s.split(" ");
-//					x=s2[0];y=s2[1];
+//
+//		JFrame f=new JFrame("LOL");
+//		JButton b=new JButton("一键秒对方基地挂");
+//		
+//		f.setLayout(null);
+//		f.add(b);
+//		b.setBounds(50, 50, 280, 30);
+//		f.setVisible(true);
+//		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		File ff=new File("C:\\Users\\57195\\Desktop\\Learning--Java\\src\\classes_objects\\location.txt");
+//		if(ff.exists()) {
+//			try(FileInputStream fis= new FileInputStream(ff);
+//					DataInputStream dis=new DataInputStream(fis)) {
+//				int x=dis.readInt();int y=dis.readInt();
+//				f.setBounds(x, y, 400, 300);
+//			} catch (FileNotFoundException e3) {
+//				// TODO Auto-generated catch block
+//				e3.printStackTrace();
+//			} catch (IOException e4) {
+//				// TODO Auto-generated catch block
+//				e4.printStackTrace();
+//			}
+//		}
+//		else {
+//			try {
+//				ff.createNewFile();
+//			} catch (IOException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//			f.setBounds(200, 200, 400, 300);
+//		}
+//		Thread t1=new Thread() {
+//			public void run() {
+//				File ff=new File("C:\\Users\\57195\\Desktop\\Learning--Java\\src\\classes_objects\\location.txt");
+//				while(true) {
+//					try {
+//						Thread.sleep(100);
+//					} catch (InterruptedException e2) {
+//						// TODO Auto-generated catch block
+//						e2.printStackTrace();
+//					}
+//					try(FileOutputStream fos= new FileOutputStream(ff);
+//							DataOutputStream dos=new DataOutputStream(fos)) {
+//						int x=f.getX();int y=f.getY();
+//						dos.writeInt(x);
+//						dos.writeInt(y);
+//					} catch (FileNotFoundException e) {
+//						// TODO Auto-generated catch block
+//						e.printStackTrace();
+//					} catch (IOException e1) {
+//						// TODO Auto-generated catch block
+//						e1.printStackTrace();
+//					}
 //				}
-//				catch (IOException e) {
+//			}
+//		};
+//		t1.start();
+//		JFrame f=new JFrame("LOL");
+//		f.setBounds(580, 200, 400, 300);
+//		f.setLayout(null);
+//		JLabel l=new JLabel();
+//		ImageIcon i=new ImageIcon("C:\\Users\\57195\\Desktop\\Learning--Java\\src\\pic\\shana.png");
+//		l.setIcon(i);
+//		l.setBounds(50, 50, i.getIconWidth(), i.getIconHeight());
+//		JButton b=new JButton("隐藏图片");
+//		b.setBounds(150, 200, 100, 30);
+//		
+//		ActionListener listener=new ActionListener() {
+//			boolean flag=false;
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				// TODO Auto-generated method stub
+//				l.setVisible(flag);
+//				flag=!flag;
+//				if(flag)
+//					b.setText("显示图片");
+//				else
+//					b.setText("隐藏图片");
+//			}
+//		};
+//		b.addActionListener(listener);
+//		f.add(l);f.add(b);
+//		f.setVisible(true);
+//		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+//		JFrame f = new JFrame("LoL");
+//        f.setSize(400, 300);
+//        f.setLocation(580, 200);
+//        f.setLayout(null);
+//  
+//        final JLabel l = new JLabel();
+//  
+//        ImageIcon i = new ImageIcon("C:\\\\Users\\\\57195\\\\Desktop\\\\Learning--Java\\\\src\\\\pic\\\\shana.png");
+//        l.setIcon(i);
+//        l.setBounds(50, 50, i.getIconWidth(), i.getIconHeight());
+//  
+//        // 增加键盘监听
+//        f.addKeyListener(new KeyListener() {
+//  
+//            // 键被弹起
+//            public void keyReleased(KeyEvent e) {
+//            	System.out.println(e.getKeyCode());
+//                // 39代表按下了 “右键”
+//            	switch(e.getKeyCode()) {
+//            		case 37:
+//            			l.setLocation(l.getX() - 10, l.getY());break;
+//            		case 38:
+//            			l.setLocation(l.getX() , l.getY() - 10);break;
+//            		case 39:
+//            			l.setLocation(l.getX() + 10, l.getY());break;
+//            		case 40:
+//            			l.setLocation(l.getX() , l.getY() + 10);break;
+//            	}
+//            }
+//  
+//            //键被按下
+//            public void keyPressed(KeyEvent e) {
+//                // TODO Auto-generated method stub
+//  
+//            }
+//  
+//            // 一个按下弹起的组合动作
+//            public void keyTyped(KeyEvent e) {
+//  
+//            }
+//        });
+//  
+//        f.add(l);
+//        
+//        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//  
+//        f.setVisible(true);
+//		
+		
+//		JFrame f=new JFrame("LoL");
+//		f.setLocationRelativeTo(null);
+//		f.setSize(400, 300);
+////		f.setBounds(200, 200, 400, 300);
+//		f.setLayout(null);
+//		String name1="annie";
+//		String name2="gareen";
+//		String name3="teemo";
+//		JPanel card1=init(name1);
+//		JPanel card2=init(name2);
+//		JPanel card3=init(name3);
+//		//	splitpane的右边
+//		JPanel cards=new JPanel();
+//		cards.setLayout(new CardLayout());
+//		cards.add(card1,name1);
+//		cards.add(card2,name2);
+//		cards.add(card3,name3);
+//		//	splitpane的左边
+//		JPanel leftPane=new JPanel();
+//		leftPane.setBounds(50, 50, 300, 60);
+//		leftPane.setLayout(new FlowLayout());
+//		JButton b1=initButton(name1,cards);
+//		JButton b2=initButton(name2,cards);
+//		JButton b3=initButton(name3,cards);
+//		leftPane.add(b1);
+//		leftPane.add(b2);
+//		leftPane.add(b3);
+//		
+//		JSplitPane sp=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,leftPane,cards);
+//		sp.setDividerLocation(80);
+////		sp.setBounds(0, 0, 500, 300);
+////		f.add(sp);
+//		f.setContentPane(sp);
+//		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		f.setVisible(true);	
+		
+//		JFrame f=new JFrame("LOL");
+//		f.setLocationRelativeTo(null);
+//		f.setSize(400,300);
+//		f.setLayout(null);
+////		JPanel默认采用流式布局
+//		JPanel pane=new JPanel();
+//		JTextField tf=new JTextField();
+//		tf.setPreferredSize(new Dimension(80,30));
+//		JButton b=new JButton("检测");
+//		b.addActionListener(new ActionListener() {
+//
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				// TODO Auto-generated method stub
+//				String get=tf.getText();
+//				try {
+//					Integer.parseInt(get);
+//				}
+//				catch(Exception e2) {
+//					JOptionPane.showMessageDialog(f, "输入框内容不是整数");
+//				}
+//				tf.grabFocus();
+//			}
+//		});
+//		pane.add(tf);pane.add(b);
+//		f.setContentPane(pane);
+//		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		f.setVisible(true);
+		
+		
+////		前后端交互（JDBC）
+//		
+//		JFrame f=new JFrame("LOL");
+//		f.setLocationRelativeTo(null);
+//		f.setSize(400,300);
+//		f.setLayout(new BorderLayout());
+////		JPanel默认采用流式布局
+//		JPanel pNorth=new JPanel();
+//		JPanel pCenter=new JPanel();
+//		JLabel l1=new JLabel("账号：");
+//		JTextField tf1=new JTextField(); 
+//		tf1.setPreferredSize(new Dimension(80,30));
+//		JLabel l2=new JLabel("密码：");
+//		JPasswordField tf2=new JPasswordField(); 
+//		tf2.setPreferredSize(new Dimension(80,30));
+//		pNorth.add(l1);pNorth.add(tf1);pNorth.add(l2);pNorth.add(tf2);
+//		JButton b=new JButton("登录");
+//		pCenter.add(b);
+//		f.add(pNorth,BorderLayout.NORTH);
+//		f.add(pCenter,BorderLayout.CENTER);
+//		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		f.setVisible(true);
+//		ActionListener al=new ActionListener() {
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				// TODO Auto-generated method stub
+//				String s1=tf1.getText();String s2=tf2.getText();
+//				if(s1.length()!=0&&s2.length()!=0) {
+//					try {
+//			            Class.forName("com.mysql.jdbc.Driver");
+//			        } catch (ClassNotFoundException e1) {
+//			            e1.printStackTrace();
+//			        }
+//					try(Connection c=DriverManager.getConnection("jdbc:mysql:"
+//							+ "//127.0.0.1:3306/graduation?characterEncoding=UTF-8"
+//							,"root","admin");
+//							Statement s=c.createStatement()){
+//						String sql="select pwd from U where adm="+s1+" and pwd="+s2;
+////						ResultSet rs = s.executeQuery(sql);
+//						
+//						s.execute(sql);
+//						ResultSet rs=s.getResultSet();
+//						
+//						boolean flag=false;
+////						if(rs.next()) {
+////							String pwd=rs.getString(1);
+////							System.out.println(s2);
+////							System.out.println(pwd);
+////							if(pwd.equals(s2)) {
+////								flag=true;
+////								System.out.println("Yes!");
+////							}
+////						}
+//						if(rs.next()) {
+//							flag=true;
+//						}
+//						if(flag) {
+//							JOptionPane.showMessageDialog(f, "登录成功！");
+//						}
+//						else {
+//							JOptionPane.showMessageDialog(f, "登录失败！");
+//						}
+//						
+//					} catch (SQLException e1) {
+//						// TODO Auto-generated catch block
+//						e1.printStackTrace();
+//					}
+//				}
+//				else {
+//					JOptionPane.showMessageDialog(f, "请完整输入账号密码！");
+//					if(s1.length()!=0&&s2.length()==0)tf2.grabFocus();
+//					else tf1.grabFocus();
+//				}
+//			}
+//		};
+//		b.addActionListener(al);
+		
+		
+//		JFrame f=new JFrame("LoL");
+//		f.setSize(400,300);
+//		f.setLocationRelativeTo(null);
+//		JPanel p=new JPanel();
+//		JProgressBar pb=new JProgressBar();
+//		pb.setMaximum(100);
+//		pb.setStringPainted(true);
+//		p.add(pb);
+//		f.setContentPane(p);
+//		Thread t=new Thread() {
+//			int gap=0;
+//			public void run() {
+//				try {
+//					while(pb.getValue()<100) {
+//						Thread.sleep(10+gap);
+//						gap+=5;
+//						pb.setValue(pb.getValue()+1);
+//					}
+//					if(pb.getValue()>=100) {
+//						JOptionPane.showMessageDialog(f, "加载完成！");
+//					}
+//				} catch (InterruptedException e) {
 //					// TODO Auto-generated catch block
 //					e.printStackTrace();
 //				}
 //			}
-//		}
-//		jf.setSize(400,300);
-//		jf.setLocation(Integer.parseInt(x),Integer.parseInt(y));
-//		jf.setLayout(null);
-//		JButton jb=new JButton("一键秒杀地方基地挂");
-//		jb.setBounds(50,50,280,30);
-//		jf.add(jb);
-//		jf.setVisible(true);
-//		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		Object o=new Object();
-//		Thread t=new Thread() {
-//			public void run() {
-//			//	synchronized(o) {
-//					while(true) {
-//						try {
-//						//	o.wait(100);
-//							Thread.sleep(100);
-//						} catch (InterruptedException e) {
-//							// TODO Auto-generated catch block
-//							e.printStackTrace();
-//						}
-//						File f=new File("C:\\Data/location.txt");
-//			//			FileOutputStream fos=new FileOutputStream(f);
-//						try(FileWriter w= new FileWriter(f);) {
-//							String x=String.valueOf(jf.getX());
-//							String y=String.valueOf(jf.getY());
-//							String temp=x+" "+y;
-//							w.write(temp);
-//						} catch (IOException e) {
-//							// TODO Auto-generated catch block
-//							e.printStackTrace();
-//						}
-//					}
-//			//	}
-//			}
 //		};
-//		t.setDaemon(true);
 //		t.start();
-		
-//		
-//		JFrame f=new JFrame("LOL");
-//		f.setSize(400,300);
-//		f.setLocation(580,200);
-//		f.setLayout(null);
-//	//	JLabel l=new JLabel("C:\\Data/shana.png");
-//		//虽然上一行注释处也可以这样做
-//		//但是这样就不方便调用图片的宽、高等参数了
-//		//整一个ImageIcon对象，调用其getIconWidth方法！
-//		JLabel l=new JLabel();
-//		ImageIcon i=new ImageIcon("C:\\Data/shana.png");
-//		l.setIcon(i);
-//		l.setBounds(50,50,i.getIconWidth(),i.getIconHeight());
-//		
-//		
-//		JButton b=new JButton("隐藏图片");
-//	//	b.setName("隐藏图片");
-//		b.setBounds(150,200,100,30);
-//		f.add(b);
-//		f.add(l);
-//		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		f.setVisible(true);
-//	//	System.out.println(b.getName());
-//	//	System.out.println(b.toString());
-//		ActionListener l1=new ActionListener() {
-//				boolean flag=true;
-//				public void actionPerformed(ActionEvent e){
-////					if(b.getName().equals("隐藏图片")) {
-////						b.setText("显示图片");
-////						b.setName("显示图片");
-////						l.setVisible(false);
-////						//理解一下。是要对内容（这个内容被设置在了标签中）显示
-////						//所以是应该对包含了这个内容的对象进行操作！
-////						//按钮如果隐藏了的话，那怎么进行事件操作呢？
-////					}
-////					else {
-////						b.setText("隐藏图片");
-////						b.setName("隐藏图片");
-////						l.setVisible(true);
-////					}
-//					//上注释是我自己通过setName,getName方法来完成的！
-//					//还有另一种方法是基于
-//					//每点一次按钮，必定发生变化。这种思想来处理简化：
-//					
-//					
-//					flag=!flag;
-//					l.setVisible(flag);
-//					String temp=flag?"隐藏图片":"显示图片";
-//					b.setText(temp);
-//					//这是个类，匿名类
-//					//所以有类属性，直接通过类属性来操作很方便！
-//				}
-//			};
-//		b.addActionListener(l1);
-		
-//		JFrame f=new JFrame("LOL");
-//		f.setSize(400,300);
-//		f.setLocation(580,200);
-//		f.setLayout(null);
-//		JLabel l=new JLabel();
-//		ImageIcon i=new ImageIcon("C:\\Data/shana.png");
-//		l.setIcon(i);
-//	//	l.setBounds(50,50,i.getIconWidth(),i.getIconHeight());
-//		l.setBounds(50,50,i.getIconWidth(),i.getIconHeight());
-//		System.out.println("图片的宽为："+i.getIconWidth()+" 高为："+i.getIconHeight());
-//		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		f.add(l);
-//		f.setVisible(true);
-//		f.addKeyListener(new KeyListener() {
-//			public void keyPressed(KeyEvent e) {
-//				switch(e.getKeyCode()) {	
-//				case 38:
-//					l.setLocation(l.getX(),l.getY()-10);break;
-//				case 40:
-//					l.setLocation(l.getX(),l.getY()+10);break;
-//				case 37:
-//					l.setLocation(l.getX()-10,l.getY());break;
-//				case 39:
-//					l.setLocation(l.getX()+10,l.getY());break;
-//				}
-//				System.out.println(e.getKeyCode()+" "+l.getX()+" "+l.getY());
-//			}
-//
-//			@Override
-//			public void keyTyped(KeyEvent e) {
-//				// TODO Auto-generated method stub
-//				
-//			}
-//
-//			@Override
-//			public void keyReleased(KeyEvent e) {
-//				// TODO Auto-generated method stub
-//				
-//			}
-//		});
-		
-//		JFrame f=new JFrame("LOL");
-//		f.setSize(400,300);
-//		f.setLocation(200,200);
-//		f.setLayout(null);
-//		JButton b=new JButton("打开一个模态窗口");
-//		b.setBounds(50,50,280,30);
-//		f.add(b);
-//		ActionListener listener1=new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				JDialog d=new JDialog(f,"模态窗口");
-//			//	d.setTitle("模态窗口");
-//				
-//			//	d.setLocation(f.getX()+120,f.getY()+130);
-//				d.setLocationRelativeTo(f);
-//				//设置窗口相对于指定组件的位置。
-//				
-//				d.setSize(200,150);
-//			//	d.setLayout(null);
-//				d.setModal(true);
-//				JButton b=new JButton("锁定大小");
-//			//	b.setBounds(50,50,280,30);
-//				//当窗口没有被设置为绝对布局时
-//				//按钮会被填充完整个窗口
-//				//所以这一行有没有都不影响最终效果
-//				//从逻辑上来说也没必要写
-//				
-//				d.add(b);
-//				ActionListener listener=new ActionListener() {
-//					boolean flag=false;
-//					public void actionPerformed(ActionEvent e) {
-//						flag=!flag;
-//						d.setResizable(flag);
-//					}
-//				};
-//				b.addActionListener(listener);
-//				d.setVisible(true);
-//		//		d.setDefaultCloseOperation(JDialog.EXIT_ON_CLOSE);
-//				//只有一个窗口需要设置这个
-//				//被设置的窗口若被关闭，则程序结束！
-//			}
-//		};
-//		b.addActionListener(listener1);
-//		f.setVisible(true);
-//		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		
-		
-//		JFrame f=new JFrame("计算器呃呃");
-//		f.setSize(400,300);
-//		f.setLocation(200,200);
-//		int gap=10;
-//		f.setLayout(new GridLayout(4,5,gap,gap));
-////		f.setLayout(new FlowLayout(100,100,100));
-//		JButton b;
-//		
-//		String set[]=new String[] {"7","8","9","/","sq","4","5","6","*","%"
-//				,"1","2","3","-","1/x","0","+/-",".","+","="};
-//		for(String s:set) {
-//			b=new JButton(s);
-////			b.setPreferredSize(new Dimension(180,40));
-//			b.setPreferredSize(new Dimension(80,80));
-//			f.add(b);
-//		}
 //		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 //		f.setVisible(true);
 		
+//		JFrame f=new JFrame("记事本");
+//		f.setSize(400,300);
+//		f.setLocationRelativeTo(null);
+////		f.setLayout(null);
+//		JMenuBar mb=new JMenuBar();
+//		JMenu m1=new JMenu("文件(A)");
+//		JMenu m2=new JMenu("编辑(E)");
+//		JMenu m3=new JMenu("格式(O)");
+//		JMenu m4=new JMenu("查看(V)");
+//		JMenu m5=new JMenu("帮助(H)");
+//		mb.add(m1);mb.add(m2);mb.add(m3);mb.add(m4);mb.add(m5);
+//		JMenuItem i1=new JMenuItem("撤销(U)                         Ctrl+Z");
+//		
+//		JMenuItem i2=new JMenuItem("剪切(T)\t\tCtrl+X");
+//		JMenuItem i3=new JMenuItem("撤销(U)\t\tCtrl+C");
+//		JMenuItem i4=new JMenuItem("撤销(U)\t\tCtrl+V");
+//		JMenuItem i5=new JMenuItem("撤销(U)\t\t  Del");
+//		
+//		JMenuItem i6=new JMenuItem("撤销(U)\t\tCtrl+F");
+//		JMenuItem i7=new JMenuItem("撤销(U)\t\t     F3");
+//		JMenuItem i8=new JMenuItem("撤销(U)\t\tCtrl+H");
+//		JMenuItem i9=new JMenuItem("撤销(U)\t\tCtrl+G");
+//		
+//		JMenuItem i10=new JMenuItem("撤销(U)\t\tCtrl+A");
+//		JMenuItem i11=new JMenuItem("撤销(U)\t\t     F5");
+//		
+//		m2.add(i1);m2.addSeparator();
+//		m2.add(i2);m2.add(i3);m2.add(i4);m2.add(i5);m2.addSeparator();
+//		m2.add(i6);m2.add(i7);m2.add(i8);m2.add(i9);m2.addSeparator();
+//		m2.add(i10);m2.add(i11);
+//		
+//		JTextArea ta=new JTextArea();
+////		f.add(ta);
+//		ta.setLineWrap(true);
+//		JScrollPane sp=new JScrollPane(ta);
+//		f.add(sp);
+//		
+//		
+//		f.setJMenuBar(mb);
+//		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		f.setVisible(true);
 		
 //		JFrame f = new JFrame("LoL");
 //        f.setSize(400, 300);
 //        f.setLocation(200, 200);
-//        f.setLayout(new FlowLayout());
+//        // 菜单
+//        addMenu(f);
 // 
-//        JButton b1 = new JButton("英雄1");
-//        JButton b2 = new JButton("英雄2");
-//        JButton b3 = new JButton("英雄3");
+//        // 工具栏
+//        JToolBar tb = new JToolBar();
+//        // 为工具栏增加按钮
+//        JButton b1 = new JButton();
+//        JButton b2 = new JButton(new ImageIcon("C:\\Users\\57195\\Desktop\\Learning--Java\\src\\pic\\2.jpg"));
+//        JButton b3 = new JButton(new ImageIcon("C:\\Users\\57195\\Desktop\\Learning--Java\\src\\pic\\3.jpg"));
+//        JButton b4 = new JButton(new ImageIcon("C:\\Users\\57195\\Desktop\\Learning--Java\\src\\pic\\4.jpg"));
+//        JButton b5 = new JButton(new ImageIcon("C:\\Users\\57195\\Desktop\\Learning--Java\\src\\pic\\5.jpg"));
+//        JButton b6 = new JButton(new ImageIcon("C:\\Users\\57195\\Desktop\\Learning--Java\\src\\pic\\6.jpg"));
+//        tb.add(b1);
+//        ImageIcon i=new ImageIcon("C:\\Users\\57195\\Desktop\\Learning--Java\\src\\pic\\1.jpg");
+//        b1.setIcon(i);
+//        b1.setToolTipText("牛牛英雄");
+//        tb.add(b2);
+//        tb.add(b3);
+//        tb.add(b4);
+//        tb.add(b5);
+//        tb.add(b6);
+//        
+//        tb.setFloatable(false);
 // 
-//        // 即便 使用 布局器 ，也可以 通过setPreferredSize，向布局器建议该组件显示的大小
-//        b3.setPreferredSize(new Dimension(180, 40));
-// 
-//        f.add(b1);
-//        f.add(b2);
-//        f.add(b3);
+//        // 把工具栏放在north的位置
+//        f.setLayout(new BorderLayout());
+//        f.add(tb, BorderLayout.NORTH);
 // 
 //        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 // 
 //        f.setVisible(true);
 		
-//		JFrame f=new JFrame("LOL");
-//		init(f);
-//		JCheckBox cb=new JCheckBox();
-//		String s=new String("我呃呃");
-//		cb.setBounds(50, 50, 130, 30);
-//		cb.setSelected(true);
-//		//一定要记得设置范围！
-//		//这四个参数分别是位置x,位置y,宽度，高度
-//		//没有设置宽度、高度相当于设置为0！
-//		//所以就会看不见，不显示！
+		JFrame f = new JFrame("LoL");
+        f.setSize(400, 300);
+        f.setLocation(200, 200);
+        f.setLayout(new BorderLayout());
+ 
+        // 表格上的title
+        String[] columnNames = new String[] { "id", "name", "hp", "damage" };
+        // 表格中的内容，是一个二维数组
+        String[][] heros = new String[][] { { "1", "盖伦", "616", "100" },
+                { "2", "提莫", "512", "102" }, { "3", "奎因", "832", "200" } };
+        JTable t = new JTable(heros, columnNames);
+        
+        
+        
+        JScrollPane sp=new JScrollPane(t);
+        f.add(sp,BorderLayout.CENTER);
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+ 
+        f.setVisible(true);
 		
-		//相当于setSize、setLocation！
-//		
-//		cb.setText(s);
-//		f.add(cb);
-//		JCheckBox cb2=new JCheckBox("牛牛");
-//		cb2.setBounds(50, 100, 130, 30);
-//		f.add(cb2);
-//		finish(f);
-		
-//		JFrame f=new JFrame("LOL");
-//		init(f);
-//		JRadioButton rb=new JRadioButton("我呃呃");
-//		rb.setSelected(true);
-//		rb.setBounds(50,50,130,30);
-//		JRadioButton rb2=new JRadioButton();
-//		rb2.setSize(130,30);
-//		rb2.setLocation(50,100);
-//	//	rb2.setBounds(50, 100, 130, 30);
-//		rb2.setText("牛牛");
-//		ButtonGroup bg=new ButtonGroup();
-//		bg.add(rb);bg.add(rb2);
-//		f.add(rb);f.add(rb2);
-//		finish(f);
-		
-//		JFrame f=new JFrame("LOL");
-//		init(f);
-//		String s[]=new String[] {"?e","我呃呃","牛牛"};
-//		JComboBox cbox=new JComboBox(s);
-//		cbox.setBounds(50,50,130,30);
-//		f.add(cbox);
-//		finish(f);
-		
-		/*
-		 * JFrame f=new JFrame("LOL"); init(f); finish(f);
-		 */
-//		int ok=JOptionPane.showConfirmDialog(f, "是否要呃呃？");
-//		if(JOptionPane.OK_OPTION==ok) {
-//			System.out.println(ok);
-//			String s=JOptionPane.showInputDialog(f,"请输入呃呃");
-//			if(s.equals("我呃呃")) {
-//				JOptionPane.showMessageDialog(f, "不许呃呃");	
-//			}
-//		}
-////		else System.out.println(ok);
-//		else if(1==ok) {
-//			JOptionPane.showMessageDialog(f, "好滴，，");
-//		}
-		
-//		JFrame f=new JFrame("LOL");
-//		initFlow(f);
-//		JTextField tf1=new JTextField("请输入账号");
-////		tf1.setPreferredSize(new Dimension(130,40));
-//	//	tf1.setSize(130,40);
-//		JTextField tf2=new JTextField("请输入密码");
-//	//	tf2.setPreferredSize(new Dimension(130,40));
-//		JLabel l1=new JLabel("账号");
-//	//	l1.setSize(100,100);
-//		JLabel l2=new JLabel("密码");
-//	//	l2.setSize(50,50);
-//		f.add(l1);f.add(tf1);
-//		f.add(l2);f.add(tf2);
-//		finish(f);
-		
-//		JFrame f=new JFrame("LOL");
-//		initFlow(f);
-//		JPasswordField pd=new JPasswordField();
-//		pd.setText("我疯狂呃呃666");
-//		JLabel l=new JLabel("密码：");
-//		pd.grabFocus();
-//		pd.setPreferredSize(new Dimension(130,40));
-//		f.add(l);f.add(pd);
-//		finish(f);
-//		char s[]=pd.getPassword();
-//	//	String xx=pd.getText();
-//		//安全性问题。JPasswordField应该用getPassword方法
-//		String x=new String(s);
-//		System.out.println("密码是："+x);
-//	//	System.out.println("密码是："+xx);
-		
-//		JFrame f=new JFrame("LOL");
-//		initFlow(f);
-//		JLabel l=new JLabel("文本域：");
-//		JTextArea ta=new JTextArea();
-//		ta.setText("我呃呃\n哽哽\r\n哦牛，，,,,,,,,,,");
-//		ta.setPreferredSize(new Dimension(50,100));
-//		f.add(l);f.add(ta);
-//		ta.setLineWrap(true);
-//		finish(f);
-		
-//		JFrame f=new JFrame("LOL");
-//		f.setSize(400,300);
-//		f.setLocation(200,200);
-//		f.setLayout(null);
-//		//布局一定要设置啊！不然就是铺满整个窗口！
-//		JPanel p1=new JPanel();
-//		p1.setBounds(50,50,300,60);
-////		p1.setLayout(new FlowLayout());
-//		// 这一句可以没有，因为JPanel默认就是采用的FlowLayout
-//		
-//		JButton pb1=new JButton("英雄1");
-//		JButton pb2=new JButton("英雄2");
-//		JButton pb3=new JButton("英雄3");
-//		p1.setBackground(Color.BLUE);
-//		p1.add(pb1);p1.add(pb2);p1.add(pb3);
-//		
-//		JPanel p2=new JPanel();
-//		p2.setBounds(10,150,300,60);
-//		p2.setBackground(Color.green);;
-////		p2.setLayout(new GridLayout(3,1));
-//	//	p2.setSize(100,100);
-//		JButton p2b1=new JButton("英雄4");
-//		JButton p2b2=new JButton("英雄5");
-//		JButton p2b3=new JButton("英雄6");
-//		p2.add(p2b1);p2.add(p2b2);p2.add(p2b3);
-//		f.getContentPane().add(p1);
-//		//Frame（门、玻璃等的框架）上面有一层东西，窗玻璃--Pane。
-//		//所以很形象。就是ContentPane 内容玻璃。
-//		//f.add()其实就是在Pane上添加内容
-//		//就是f.getContentPane.add()。
-//		System.out.println(p2b3.getParent());//在基本面板JPanel上
-//		JButton test=new JButton("呃呃");
-//		test.setSize(80,80);
-//		f.add(test);System.out.println(test.getParent());
-//		//打印可以看出，Parent是contentPane！
-//	//	f.add(p1);
-//		f.add(p2);
-//		finish(f);
-		
-//		JFrame f=new JFrame("LOL");
-//		f.setBounds(200,200,400,300);
-//		f.setLayout(null);
-//		JTextArea ta=new JTextArea();
-////		ta.setSize(500,100);
-//		ta.setLineWrap(true);
-//		for (int i = 0; i < 100; i++) {
-//			ta.append("dfaoewanoc");
-//		}
-//	//	f.add(ta);
-//		JTextArea ta2=new JTextArea();
-////		ta.setSize(500,100);
-//		ta.setLineWrap(true);
-//		for (int i = 0; i < 100; i++) {
-//			ta2.append("d123415");
-//		}
-//		ta2.setLineWrap(true);
-//		JScrollPane sp=new JScrollPane(ta);
-//		sp.setSize(200,200);
-//	//	sp.setViewportView(ta2);
-//		f.add(sp);
-////		f.setContentPane(sp);
-////		f.setContentPane(ta);
-//		//如果用其他pane代替了contentPane，似乎Frame不设置Layout也可显示内容
-//		//似乎有点理解了
-//		//因为本身Frame作为一个最基本的容器
-//		//自身上带有一层Pane，这个Pane肯定得是空的
-//		//以便来放其他的组件！
-//		//若直接将其他Pane替换掉这个空的contentPane
-//		//这个用来替换的Pane上如果有内容，自然而然就会显示！
-//		
-//		//缺点就是不能起到通过这个contentPane达到布局的作用了！
-//		//直接Frame.add是在contentPane上add！
-//		
-//		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		f.setVisible(true);
-		
-		
-		
-		
-		//CardLayout的show方法等有疑惑。。。
-		
-//		JFrame f=new JFrame("LOL");
-//		f.setBounds(200,200,400,300);
-//		f.setLayout(null);
-//		JPanel p1=new JPanel();
-//	//	p1.setLayout(new FlowLayout());//可有可无。默认是流式布局
-//		JButton h1=new JButton("盖伦");
-//		JButton h2=new JButton("提莫");
-//		JButton h3=new JButton("安妮");
-//		p1.add(h1);p1.add(h2);p1.add(h3);
-//		JPanel card1=new JPanel();
-//		JPanel card2=new JPanel();
-//		JPanel card3=new JPanel();
-////		JLabel l1=new JLabel("gareen");
-////		JLabel l2=new JLabel("annie");
-////		JLabel l3=new JLabel("teemo");
-//		JLabel l1=new JLabel();
-//		JLabel l2=new JLabel();
-//		JLabel l3=new JLabel();
-//		ImageIcon i1=new ImageIcon("C:\\Data\\pics/gareen.jpg");
-//		ImageIcon i2=new ImageIcon("C:\\Data\\pics/annie.jpg");
-//		ImageIcon i3=new ImageIcon("C:\\Data\\pics/teemo.jpg");
-//		l1.setIcon(i1);l3.setIcon(i3);l2.setIcon(i2);
-//		l1.setSize(i1.getIconWidth(),i1.getIconHeight());
-//		l3.setSize(i3.getIconWidth(),i3.getIconHeight());
-//		l2.setSize(i2.getIconWidth(),i2.getIconHeight());
-//		card1.add(l1);card3.add(l3);card2.add(l2);
-//		JPanel cards=new JPanel();
-//		CardLayout cl=new CardLayout();
-//		cards.setLayout(cl);
-//		cards.add(card1,"gareen");cards.add(card2,"annie");cards.add(card3,"teemo");
-//		JSplitPane sp=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,p1,cards);
-//		sp.setDividerLocation(80);
-//	//	f.add(sp);
-//		f.setContentPane(sp);
-//		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		f.setVisible(true);
-//		ActionListener al1=new ActionListener() {
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				// TODO Auto-generated method stub
-//				String name=h1.getText();
-//				cl.show(cards, name);
-//			}
-//		};
-//		
-//		
-//		ActionListener al2=new ActionListener() {
-//
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				// TODO Auto-generated method stub
-//				System.out.println("Here");
-//				String name=h2.getText();
-//				cl.show(cards, name);
-//			}
-//		};
-//		ActionListener al3=new ActionListener() {
-//
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				// TODO Auto-generated method stub
-//			//	String name=h3.getText();
-//				String name=e.getActionCommand();
-//				CardLayout cl=(CardLayout) cards.getLayout();
-//				cl.show(cards, name);
-//			}
-//		};
-//		h1.addActionListener(al1);
-//		h2.addActionListener(al2);
-//		h3.addActionListener(al3);
-		
-		
-		
-		JFrame f=new JFrame("LOL");
-		f.setBounds(200,200,400,300);
-		f.setLayout(null);
-		JPanel p1=new JPanel();
-	//	p1.setLayout(new FlowLayout());//可有可无。默认是流式布局
-		JButton h1=new JButton("盖伦");
-		JButton h2=new JButton("提莫");
-		JButton h3=new JButton("安妮");
-		p1.add(h1);p1.add(h2);p1.add(h3);
-		JPanel card=new JPanel();
+	}
+	private static void addMenu(JFrame f) {
+        JMenuBar mb = new JMenuBar();
+ 
+        JMenu mHero = new JMenu("英雄");
+        JMenu mItem = new JMenu("道具");
+        JMenu mWord = new JMenu("符文");
+        JMenu mSummon = new JMenu("召唤师");
+        JMenu mTalent = new JMenu("天赋树");
+ 
+        // 菜单项
+        mHero.add(new JMenuItem("近战-Warriar"));
+        mHero.add(new JMenuItem("远程-Range"));
+        mHero.add(new JMenuItem("物理-physical"));
+        mHero.add(new JMenuItem("坦克-Tank"));
+        mHero.add(new JMenuItem("法系-Mage"));
+        mHero.add(new JMenuItem("辅助-Support"));
+        mHero.add(new JMenuItem("打野-Jungle"));
+        mHero.add(new JMenuItem("突进-Charge"));
+        mHero.add(new JMenuItem("男性-Boy"));
+        mHero.add(new JMenuItem("女性-Girl"));
+ 
+        mb.add(mHero);
+        mb.add(mItem);
+        mb.add(mWord);
+        mb.add(mSummon);
+        mb.add(mTalent);
+ 
+        f.setJMenuBar(mb);
+    }
+	public static JButton initButton(String name,JPanel cards) {
+		JButton b=new JButton(name);
+		b.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				CardLayout cl=(CardLayout)cards.getLayout();
+				cl.show(cards, name);
+			}
+		});
+		return b;
+	}
+	public static JPanel init(String name) {
+		String target="C:\\Users\\57195\\Desktop\\Learning--Java\\src\\pic\\"+name+".jpg";
+//		System.out.println(target);
+		JPanel Pane=new JPanel();
 		JLabel l=new JLabel();
-		ImageIcon i1=new ImageIcon("C:\\Data\\pics/gareen.jpg");
-		ImageIcon i2=new ImageIcon("C:\\Data\\pics/annie.jpg");
-		ImageIcon i3=new ImageIcon("C:\\Data\\pics/teemo.jpg");
-		l.setIcon(i1);
-		l.setSize(i1.getIconWidth(),i1.getIconHeight());
-		card.add(l);
-		CardLayout cl=new CardLayout();
-		JSplitPane sp=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,p1,card);
-		sp.setDividerLocation(80);
-	//	f.add(sp);
-		f.setContentPane(sp);
-		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		f.setVisible(true);
-		ActionListener al1=new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				l.setIcon(i1);
-				l.setSize(i1.getIconWidth(),i1.getIconHeight());
-			}
-		};
-		
-		
-		ActionListener al2=new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				l.setIcon(i2);
-				l.setSize(i2.getIconWidth(),i2.getIconHeight());
-			}
-		};
-		ActionListener al3=new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-			//	String name=h3.getText();
-				l.setIcon(i3);
-				l.setSize(i3.getIconWidth(),i3.getIconHeight());
-			}
-		};
-		h1.addActionListener(al1);
-		h2.addActionListener(al2);
-		h3.addActionListener(al3);
-	}
-	public static void init(JFrame f) {
-//		f.setSize(400,300);
-//		f.setLocation(200,200);
-		f.setBounds(200,200,400,300);
-		f.setLayout(null);
-	}
-	public static void initFlow(JFrame f) {
-//		f.setSize(400,300);
-//		f.setLocation(200,200);
-		f.setBounds(200,200,400,300);
-		f.setLayout(new FlowLayout());
-	}
-	public static void finish(JFrame f) {
-		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		f.setVisible(true);
+		ImageIcon i=new ImageIcon(target);
+		l.setIcon(i);
+		l.setBounds(50 , 50, i.getIconWidth(), i.getIconHeight());
+		Pane.add(l);
+		return Pane;
 	}
 }
